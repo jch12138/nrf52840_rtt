@@ -3,9 +3,17 @@ Import('rtconfig')
 from building import *
 
 cwd = GetCurrentDir()
-src = Glob('*.c')
+src = Split('''
+board.c
+''')
 CPPPATH = [cwd]
 define = ['USE_APP_CONFIG']
+
+if GetDepend('BSP_USING_FLASH'):
+	src += ['w25q16.c']
+
+if GetDepend('BSP_USING_SDCARD'):
+	src += ['sdcard.c']
 
 group = DefineGroup('Drivers', src, depend = [''], CPPPATH = CPPPATH,CPPDEFINES = define)
 Return('group')

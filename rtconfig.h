@@ -100,6 +100,7 @@
 #define RT_SERIAL_RB_BUFSZ 64
 #define RT_USING_PIN
 #define RT_USING_SPI
+#define RT_USING_SPI_MSD
 #define RT_USING_SFUD
 #define RT_SFUD_USING_SFDP
 #define RT_SFUD_USING_FLASH_INFO_TABLE
@@ -216,6 +217,7 @@
 /* Onboard Peripheral Drivers */
 
 #define BSP_USING_JLINK_TO_USART
+#define BSP_USING_FLASH
 
 /* On-chip Peripheral Drivers */
 

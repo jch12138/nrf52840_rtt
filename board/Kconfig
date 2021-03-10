@@ -29,43 +29,18 @@ menu "Onboard Peripheral Drivers"
         select BSP_USING_UART0
         default y
 
-    menuconfig BSP_USING_QSPI_FLASH
-        select PKG_USING_FAL
-        bool "Enable QSPI FLASH(MX25R64 8MB)"
+    menuconfig BSP_USING_FLASH
+        bool "Enable SPI FLASH(W25Q16 2MB)"
+        select NRFX_SPI_ENABLED
+        select BSP_USING_SPI0
+        default n
+    
+    menuconfig BSP_USING_SDCARD
+        bool "Enable SPI SDCARD"
+        select NRFX_SPI_ENABLED
+        select BSP_USING_SPI0
         default n
 
-        if BSP_USING_QSPI_FLASH
-            config NRFX_QSPI_ENABLED
-            int 
-            default 1
-            config BSP_QSPI_SCK_PIN
-                int "QSPI SCK pin number"
-                range 0 31
-                default 19
-            config BSP_QSPI_CSN_PIN
-                int "QSPI CSN pin number"
-                range 0 31
-                default 17
-            config BSP_QSPI_IO0_PIN
-                int "QSPI IO0 pin number"
-                range 0 31
-                default 20
-            config BSP_QSPI_IO1_PIN
-                int "QSPI IO1 pin number"
-                range 0 31
-                default 21
-            config BSP_QSPI_IO2_PIN
-                int "QSPI IO2 pin number"
-                range 0 31
-                default 22
-            config BSP_QSPI_IO3_PIN
-                int "QSPI IO3 pin number"
-                range 0 31
-                default 23
-            config QSPI_FLASH_SIZE_KB 
-                int "QSPI FLASH SIZE, DEFAULT size 8192 KB"
-                default 8192
-        endif
 endmenu
 
 menu "On-chip Peripheral Drivers"
@@ -331,19 +306,19 @@ menu "On-chip Peripheral Drivers"
                 config BSP_SPI0_SCK_PIN
                     int "SPI0 sck pin number set"
                     range 0 47
-                    default 28
+                    default 23
                 config BSP_SPI0_MOSI_PIN
                     int "SPI0 mosi pin number set"
                     range 0 47
-                    default 29
+                    default 20
                 config BSP_SPI0_MISO_PIN
                     int "SPI0 miso pin number set"
                     range 0 47
-                    default 30
+                    default 21
                 config BSP_SPI0_SS_PIN
                     int "SPI0 ss pin number set"
                     range 0 47
-                    default 31
+                    default 22
             endif
 
             config BSP_USING_SPI1
