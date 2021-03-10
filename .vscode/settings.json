@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "spi_flash_sfud.h": "c",
+        "sfud.h": "c",
+        "sfud_def.h": "c",
+        "sfud_flash_def.h": "c"
+    }
+}

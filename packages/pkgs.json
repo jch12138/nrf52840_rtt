@@ -1,5 +1,10 @@
 [
  {
+  "path": "/packages/peripherals/nrf5x_sdk", 
+  "ver": "latest", 
+  "name": "NRF5X_SDK"
+ }, 
+ {
   "path": "/packages/peripherals/nrfx", 
   "ver": "v2.1.0", 
   "name": "NRFX"

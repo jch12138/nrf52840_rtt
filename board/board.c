@@ -11,6 +11,7 @@
 #include <rtthread.h>
 #include <rthw.h>
 #include <nrfx_systick.h>
+#include <nrf_delay.h>
 
 #include "board.h"
 #include "drv_uart.h"
@@ -49,6 +50,10 @@ void SysTick_Configuration(void)
 
 }
 
+void rt_hw_us_delay(rt_uint32_t us)
+{
+		nrf_delay_us(us);
+}
 
 void rt_hw_board_init(void)
 {

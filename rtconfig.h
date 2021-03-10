@@ -10,7 +10,7 @@
 #define RT_ALIGN_SIZE 4
 #define RT_THREAD_PRIORITY_32
 #define RT_THREAD_PRIORITY_MAX 32
-#define RT_TICK_PER_SECOND 100
+#define RT_TICK_PER_SECOND 1000
 #define RT_USING_OVERFLOW_CHECK
 #define RT_USING_HOOK
 #define RT_USING_IDLE_HOOK
@@ -71,6 +71,26 @@
 
 /* Device virtual file system */
 
+#define RT_USING_DFS
+#define DFS_USING_WORKDIR
+#define DFS_FILESYSTEMS_MAX 2
+#define DFS_FILESYSTEM_TYPES_MAX 2
+#define DFS_FD_MAX 16
+#define RT_USING_DFS_ELMFAT
+
+/* elm-chan's FatFs, Generic FAT Filesystem Module */
+
+#define RT_DFS_ELM_CODE_PAGE 437
+#define RT_DFS_ELM_WORD_ACCESS
+#define RT_DFS_ELM_USE_LFN_3
+#define RT_DFS_ELM_USE_LFN 3
+#define RT_DFS_ELM_LFN_UNICODE_0
+#define RT_DFS_ELM_LFN_UNICODE 0
+#define RT_DFS_ELM_MAX_LFN 255
+#define RT_DFS_ELM_DRIVES 2
+#define RT_DFS_ELM_MAX_SECTOR_SIZE 4096
+#define RT_DFS_ELM_REENTRANT
+#define RT_USING_DFS_DEVFS
 
 /* Device Drivers */
 
@@ -79,6 +99,11 @@
 #define RT_USING_SERIAL
 #define RT_SERIAL_RB_BUFSZ 64
 #define RT_USING_PIN
+#define RT_USING_SPI
+#define RT_USING_SFUD
+#define RT_SFUD_USING_SFDP
+#define RT_SFUD_USING_FLASH_INFO_TABLE
+#define RT_SFUD_SPI_MAX_HZ 50000000
 
 /* Using USB */
 
@@ -86,6 +111,7 @@
 /* POSIX layer and C standard library */
 
 #define RT_USING_LIBC
+#define RT_USING_POSIX
 
 /* Network */
 
@@ -138,15 +164,45 @@
 /* system packages */
 
 
+/* Micrium: Micrium software products porting for RT-Thread */
+
+
 /* peripheral libraries and drivers */
 
+#define PKG_USING_NRF5X_SDK
+#define NRFX_RTC_ENABLED 1
+#define NRFX_RTC1_ENABLED 1
+#define NRF_CLOCK_ENABLED 1
+#define NRF_SDH_BLE_ENABLED 1
+#define NRF_SDH_ENABLED 1
+#define NRF_SDH_SOC_ENABLED 1
+#define NRF_SDH_BLE_PERIPHERAL_LINK_COUNT 1
+#define BLE_ADVERTISING_ENABLED 1
+#define NRF_BLE_QWR_ENABLED 1
+#define NRF_SDH_BLE_VS_UUID_COUNT 1
+#define NRF_BLE_CONN_PARAMS_ENABLED 1
+#define NRF_BLE_CONN_PARAMS_MAX_SLAVE_LATENCY_DEVIATION 499
+#define NRF_BLE_CONN_PARAMS_MAX_SUPERVISION_TIMEOUT_DEVIATION 65535
+#define NRF_BLE_GATT_ENABLED 1
+#define NRF_SDH_BLE_GATT_MAX_MTU_SIZE 247
+#define SD_BLE_APP_HRS
+#define BLE_HRS_ENABLED 1
+#define BLE_DIS_ENABLED 1
+#define BLE_BAS_ENABLED 1
+#define PKG_USING_NRF5X_SDK_LATEST_VERSION
 #define PKG_USING_NRFX
 #define PKG_USING_NRFX_V210
+
+/* AI packages */
+
 
 /* miscellaneous packages */
 
 
 /* samples: kernel and components samples */
+
+
+/* games: games run on RT-Thread console */
 
 
 /* Hardware Drivers Config */
@@ -172,6 +228,14 @@
 #define NRFX_UART0_ENABLED 1
 #define BSP_UART0_RX_PIN 8
 #define BSP_UART0_TX_PIN 6
+#define BSP_USING_SPI
+#define NRFX_SPI_ENABLED 1
+#define BSP_USING_SPI0
+#define NRFX_SPI0_ENABLED 1
+#define BSP_SPI0_SCK_PIN 23
+#define BSP_SPI0_MOSI_PIN 20
+#define BSP_SPI0_MISO_PIN 21
+#define BSP_SPI0_SS_PIN 22
 
 /* On-chip flash config */
 
@@ -180,6 +244,6 @@
 #define MCU_SRAM_START_ADDRESS 0x20000000
 #define MCU_SRAM_SIZE_KB 256
 #define MCU_FLASH_PAGE_SIZE 0x1000
-#define BLE_STACK_USING_NULL
+#define BSP_USING_SOFTDEVICE
 
 #endif
