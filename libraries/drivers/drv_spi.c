@@ -179,7 +179,7 @@ static rt_err_t spi_configure(struct rt_spi_device *device,
         config.frequency = NRF_SPI_FREQ_8M;
         break;
     default:
-        LOG_E("spi_configure rate error %d\n",configuration->max_hz);
+        //LOG_E("spi_configure rate error %d\n",configuration->max_hz);
         break;
     }
 
