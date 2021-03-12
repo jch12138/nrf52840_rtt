@@ -1,0 +1,9 @@
+menu "softdevice support sample Config"
+    config BLE_APP_BEACON
+    bool "BLE_APP_BEACON"
+    default y
+endmenu
+
+
+
+
