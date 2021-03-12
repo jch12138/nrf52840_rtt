@@ -1,5 +1,10 @@
 [
  {
+  "path": "/packages/tools/CoreMark", 
+  "ver": "latest", 
+  "name": "COREMARK"
+ }, 
+ {
   "path": "/packages/peripherals/nrf5x_sdk", 
   "ver": "latest", 
   "name": "NRF5X_SDK"

@@ -15,7 +15,7 @@
 #define RT_USING_HOOK
 #define RT_USING_IDLE_HOOK
 #define RT_IDLE_HOOK_LIST_SIZE 4
-#define IDLE_THREAD_STACK_SIZE 256
+#define IDLE_THREAD_STACK_SIZE 1024
 #define RT_USING_TIMER_SOFT
 #define RT_TIMER_THREAD_PRIO 4
 #define RT_TIMER_THREAD_STACK_SIZE 512
@@ -99,6 +99,7 @@
 #define RT_USING_SERIAL
 #define RT_SERIAL_RB_BUFSZ 64
 #define RT_USING_PIN
+#define RT_USING_ADC
 #define RT_USING_SPI
 #define RT_USING_SPI_MSD
 #define RT_USING_SFUD
@@ -161,6 +162,14 @@
 
 /* tools packages */
 
+#define PKG_USING_COREMARK
+#define COREMARK_USE_FLOAT
+#define COREMARK_ITERATIONS 3600
+
+/* You may ajust this number to make sure the benchmark runs for at least 10s */
+
+#define PKG_USING_COREMARK_LATEST_VERSION
+#define CORE_MARK_HAS_FLOAT 1
 
 /* system packages */
 
@@ -217,12 +226,14 @@
 /* Onboard Peripheral Drivers */
 
 #define BSP_USING_JLINK_TO_USART
-#define BSP_USING_FLASH
+#define BSP_USING_SDCARD
 
 /* On-chip Peripheral Drivers */
 
 #define BSP_USING_GPIO
 #define NRFX_GPIOTE_ENABLED 1
+#define BSP_USING_SAADC
+#define NRFX_SAADC_ENABLED 1
 #define BSP_USING_UART
 #define NRFX_USING_UART
 #define NRFX_UART_ENABLED 1

@@ -242,11 +242,11 @@ void saadc_sample(void)
     adc_dev = (rt_adc_device_t)rt_device_find(ADC_NAME);
     adc_dev->parent.user_data = &channel_config;
     
-    channel_config = (drv_nrfx_saadc_channel_t){.mode = SAMPLE_ADC_MODE_SINGLE_ENDED, 
-                                                .pin_p = SAMPLE_ADC_AIN1, 
-                                                .pin_n = SAMPLE_ADC_AIN_NC, 
-                                                .channel_num = SAMPLE_ADC_CHANNEL_0};
-    rt_adc_enable(adc_dev, channel_config.channel_num);
+    // channel_config = (drv_nrfx_saadc_channel_t){.mode = SAMPLE_ADC_MODE_SINGLE_ENDED, 
+    //                                             .pin_p = SAMPLE_ADC_AIN1, 
+    //                                             .pin_n = SAMPLE_ADC_AIN_NC, 
+    //                                             .channel_num = SAMPLE_ADC_CHANNEL_0};
+    // rt_adc_enable(adc_dev, channel_config.channel_num);
         
     channel_config = (drv_nrfx_saadc_channel_t){.mode = SAMPLE_ADC_MODE_SINGLE_ENDED, 
                                                 .pin_p = SAMPLE_ADC_AIN2, 
@@ -254,29 +254,28 @@ void saadc_sample(void)
                                                 .channel_num = SAMPLE_ADC_CHANNEL_1};
     rt_adc_enable(adc_dev, channel_config.channel_num);
     
-    channel_config = (drv_nrfx_saadc_channel_t){.mode = SAMPLE_ADC_MODE_SINGLE_ENDED, 
-                                                .pin_p = SAMPLE_ADC_AIN7, 
-                                                .pin_n = SAMPLE_ADC_AIN_NC, 
-                                                .channel_num = SAMPLE_ADC_CHANNEL_5};
-    rt_adc_enable(adc_dev, channel_config.channel_num);
+    // channel_config = (drv_nrfx_saadc_channel_t){.mode = SAMPLE_ADC_MODE_SINGLE_ENDED, 
+    //                                             .pin_p = SAMPLE_ADC_AIN7, 
+    //                                             .pin_n = SAMPLE_ADC_AIN_NC, 
+    //                                             .channel_num = SAMPLE_ADC_CHANNEL_5};
+    // rt_adc_enable(adc_dev, channel_config.channel_num);
     
     int count = 1; 
     while(count++)
     {
-        result = rt_adc_read(adc_dev, 0);
-        rt_kprintf("saadc channel 0 value = %d, ",result);
+        // result = rt_adc_read(adc_dev, 0);
+        // rt_kprintf("saadc channel 0 value = %d, ",result);
         
         result = rt_adc_read(adc_dev, 1);
-        rt_kprintf("saadc channel 1 value = %d, ",result);
+        // rt_kprintf("saadc channel 1 value = %d, ",result);
         
-        result = rt_adc_read(adc_dev, 5);
-        rt_kprintf("saadc channel 5 value = %d",result);  
+        // result = rt_adc_read(adc_dev, 5);
+        // rt_kprintf("saadc channel 5 value = %d",result);  
         
-        rt_kprintf("\r\n"); 
-        rt_thread_mdelay(1000);
+				// rt_kprintf("\r\n"); 
+        rt_thread_mdelay(20);
     }
 }
 MSH_CMD_EXPORT(saadc_sample, saadc sample);
-
 #endif /* RT_USING_ADC */
 

@@ -2,6 +2,9 @@
 #include "rtdevice.h"
 #include "drv_spi.h"
 #include "spi_flash_sfud.h"
+#include <dfs_elm.h>
+#include <dfs_fs.h>
+#include <dfs_posix.h>
 
 #define DBG_TAG "FLASH"
 #define DBG_LVL DBG_INFO
