@@ -200,6 +200,10 @@
 
 /* miscellaneous packages */
 
+#define PKG_USING_FASTLZ
+#define FASTLZ_USING_SAMPLE
+#define FASTLZ_SAMPLE_COMPRESSION_LEVEL 2
+#define PKG_USING_FASTLZ_V101
 
 /* samples: kernel and components samples */
 

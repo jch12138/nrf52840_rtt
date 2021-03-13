@@ -34,3 +34,8 @@ ncscope.*
 #ctag files
 tags
 
+.vscode
+JlinkLog.txt
+*.ini
+
+

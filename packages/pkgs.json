@@ -8,5 +8,10 @@
   "path": "/packages/peripherals/nrfx", 
   "ver": "v2.1.0", 
   "name": "NRFX"
+ }, 
+ {
+  "path": "/packages/misc/fastlz", 
+  "ver": "v1.0.1", 
+  "name": "FASTLZ"
  }
 ]
