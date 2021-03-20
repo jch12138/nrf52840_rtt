@@ -101,7 +101,7 @@ static rt_err_t nrf5x_adc_enabled(struct rt_adc_device *device, rt_uint32_t chan
         err_code = nrfx_saadc_channels_config(channels_cache,results.channel_count);
 
         err_code = nrfx_saadc_simple_mode_set(get_channels_mask(),
-                                      NRF_SAADC_RESOLUTION_12BIT,
+                                      NRF_SAADC_RESOLUTION_10BIT,
                                       NRF_SAADC_OVERSAMPLE_DISABLED,
                                       nrf5x_saadc_event_hdr);
         
@@ -143,7 +143,7 @@ static rt_err_t nrf5x_adc_enabled(struct rt_adc_device *device, rt_uint32_t chan
             err_code = nrfx_saadc_channels_config(channels_cache,results.channel_count);
 
             err_code = nrfx_saadc_simple_mode_set(get_channels_mask(),
-                                          NRF_SAADC_RESOLUTION_12BIT,
+                                          NRF_SAADC_RESOLUTION_10BIT,
                                           NRF_SAADC_OVERSAMPLE_DISABLED,
                                           nrf5x_saadc_event_hdr);
             

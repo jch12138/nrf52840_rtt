@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>nRF52840_xxAA</Device>
           <Vendor>Nordic Semiconductor</Vendor>
-          <PackID>NordicSemiconductor.nRF_DeviceFamilyPack.8.38.0</PackID>
+          <PackID>NordicSemiconductor.nRF_DeviceFamilyPack.8.35.0</PackID>
           <PackURL>http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/</PackURL>
           <Cpu>IRAM(0x20000000,0x40000) IROM(0x00000000,0x100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -322,7 +322,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>1</wLevel>
+            <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -339,7 +339,7 @@
               <MiscControls>--reduce_paths</MiscControls>
               <Define>NRF52840_XXAA, SOFTDEVICE_PRESENT, __CLK_TCK=RT_TICK_PER_SECOND, __RTTHREAD__, CONFIG_GPIO_AS_PINRESET, USE_APP_CONFIG, RT_USING_ARM_LIBC</Define>
               <Undefine></Undefine>
-              <IncludePath>applications;.;libraries\cmsis\include;rt-thread\libcpu\arm\common;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\spi;rt-thread\components\drivers\include;rt-thread\components\drivers\spi\sfud\inc;rt-thread\components\drivers\include;board;libraries\drivers;packages\fastlz-v1.0.1;rt-thread\components\dfs\include;rt-thread\components\dfs\filesystems\devfs;rt-thread\components\dfs\filesystems\elmfat;rt-thread\components\finsh;.;rt-thread\include;rt-thread\components\libc\compilers\armlibc;rt-thread\components\libc\compilers\common;packages\nrfx-v2.1.0;packages\nrfx-v2.1.0\drivers;packages\nrfx-v2.1.0\drivers\include;packages\nrfx-v2.1.0\mdk;packages\nrfx-v2.1.0\hal;packages\nrf5x_sdk-latest\components\libraries\util;packages\nrf5x_sdk-latest\components\libraries\experimental_section_vars;packages\nrf5x_sdk-latest\components\libraries\log;packages\nrf5x_sdk-latest\components\libraries\log\src;packages\nrf5x_sdk-latest\components\libraries\strerror;packages\nrf5x_sdk-latest\components\libraries\memobj;packages\nrf5x_sdk-latest\components\libraries\balloc;packages\nrf5x_sdk-latest\components\libraries\atomic;packages\nrf5x_sdk-latest\components\libraries\atomic_flags;packages\nrf5x_sdk-latest\components\libraries\sensorsim;packages\nrf5x_sdk-latest\components\ble\ble_link_ctx_manager;packages\nrf5x_sdk-latest\components\ble\common;packages\nrf5x_sdk-latest\components\ble\ble_advertising;packages\nrf5x_sdk-latest\components\ble\nrf_ble_gatt;packages\nrf5x_sdk-latest\components\ble\nrf_ble_qwr;packages\nrf5x_sdk-latest\components\ble\ble_services\ble_lbs;packages\nrf5x_sdk-latest\components\softdevice\common;packages\nrf5x_sdk-latest\components\softdevice\s140\headers;packages\nrf5x_sdk-latest\components\softdevice\s140\headers\nrf52;packages\nrf5x_sdk-latest\integration\nrfx\legacy;packages\nrf5x_sdk-latest\components\ble\ble_services\ble_hrs;packages\nrf5x_sdk-latest\components\ble\ble_services\ble_dis;packages\nrf5x_sdk-latest\components\ble\ble_services\ble_bas</IncludePath>
+              <IncludePath>applications;.;libraries\cmsis\include;rt-thread\libcpu\arm\common;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\spi;rt-thread\components\drivers\include;rt-thread\components\drivers\spi\sfud\inc;rt-thread\components\drivers\include;board;libraries\drivers;packages\fastlz-v1.0.1;rt-thread\components\dfs\include;rt-thread\components\dfs\filesystems\devfs;rt-thread\components\dfs\filesystems\elmfat;rt-thread\components\finsh;.;rt-thread\include;rt-thread\components\libc\compilers\armlibc;rt-thread\components\libc\compilers\common;packages\nrfx-v2.1.0;packages\nrfx-v2.1.0\drivers;packages\nrfx-v2.1.0\drivers\include;packages\nrfx-v2.1.0\mdk;packages\nrfx-v2.1.0\hal;packages\nrf5x_sdk-latest\components\libraries\util;packages\nrf5x_sdk-latest\components\libraries\experimental_section_vars;packages\nrf5x_sdk-latest\components\libraries\log;packages\nrf5x_sdk-latest\components\libraries\log\src;packages\nrf5x_sdk-latest\components\libraries\strerror;packages\nrf5x_sdk-latest\components\libraries\memobj;packages\nrf5x_sdk-latest\components\libraries\balloc;packages\nrf5x_sdk-latest\components\libraries\atomic;packages\nrf5x_sdk-latest\components\libraries\atomic_flags;packages\nrf5x_sdk-latest\components\libraries\sensorsim;packages\nrf5x_sdk-latest\components\ble\ble_link_ctx_manager;packages\nrf5x_sdk-latest\components\ble\common;packages\nrf5x_sdk-latest\components\ble\ble_advertising;packages\nrf5x_sdk-latest\components\ble\nrf_ble_gatt;packages\nrf5x_sdk-latest\components\ble\nrf_ble_qwr;packages\nrf5x_sdk-latest\components\ble\ble_services\ble_lbs;packages\nrf5x_sdk-latest\components\softdevice\common;packages\nrf5x_sdk-latest\components\softdevice\s140\headers;packages\nrf5x_sdk-latest\components\softdevice\s140\headers\nrf52;packages\nrf5x_sdk-latest\integration\nrfx\legacy</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -384,14 +384,44 @@
           <GroupName>Applications</GroupName>
           <Files>
             <File>
-              <FileName>sample.c</FileName>
+              <FileName>ble_app_hrs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>applications\sample.c</FilePath>
+              <FilePath>applications\ble_app_hrs.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_nus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ble_nus.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_dis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ble_dis.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_bas.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ble_bas.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_app_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ble_app_uart.c</FilePath>
             </File>
             <File>
               <FileName>application.c</FileName>
               <FileType>1</FileType>
               <FilePath>applications\application.c</FilePath>
+            </File>
+            <File>
+              <FileName>sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_hrs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ble_hrs.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -404,24 +434,24 @@
               <FilePath>rt-thread\libcpu\arm\common\div0.c</FilePath>
             </File>
             <File>
-              <FileName>showmem.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\libcpu\arm\common\showmem.c</FilePath>
-            </File>
-            <File>
               <FileName>backtrace.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\libcpu\arm\common\backtrace.c</FilePath>
             </File>
             <File>
-              <FileName>cpuport.c</FileName>
+              <FileName>showmem.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\libcpu\arm\cortex-m4\cpuport.c</FilePath>
+              <FilePath>rt-thread\libcpu\arm\common\showmem.c</FilePath>
             </File>
             <File>
               <FileName>context_rvds.S</FileName>
               <FileType>2</FileType>
               <FilePath>rt-thread\libcpu\arm\cortex-m4\context_rvds.S</FilePath>
+            </File>
+            <File>
+              <FileName>cpuport.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\libcpu\arm\cortex-m4\cpuport.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -543,19 +573,9 @@
               <FilePath>rt-thread\components\drivers\spi\spi_flash_sfud.c</FilePath>
             </File>
             <File>
-              <FileName>dataqueue.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\src\dataqueue.c</FilePath>
-            </File>
-            <File>
               <FileName>waitqueue.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\drivers\src\waitqueue.c</FilePath>
-            </File>
-            <File>
-              <FileName>workqueue.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\src\workqueue.c</FilePath>
             </File>
             <File>
               <FileName>ringblk_buf.c</FileName>
@@ -563,9 +583,14 @@
               <FilePath>rt-thread\components\drivers\src\ringblk_buf.c</FilePath>
             </File>
             <File>
-              <FileName>pipe.c</FileName>
+              <FileName>completion.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\src\pipe.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\completion.c</FilePath>
+            </File>
+            <File>
+              <FileName>dataqueue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\src\dataqueue.c</FilePath>
             </File>
             <File>
               <FileName>ringbuffer.c</FileName>
@@ -573,9 +598,14 @@
               <FilePath>rt-thread\components\drivers\src\ringbuffer.c</FilePath>
             </File>
             <File>
-              <FileName>completion.c</FileName>
+              <FileName>workqueue.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\src\completion.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\workqueue.c</FilePath>
+            </File>
+            <File>
+              <FileName>pipe.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\src\pipe.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -583,9 +613,9 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>sdcard.c</FileName>
+              <FileName>w25q16.c</FileName>
               <FileType>1</FileType>
-              <FilePath>board\sdcard.c</FilePath>
+              <FilePath>board\w25q16.c</FilePath>
             </File>
             <File>
               <FileName>board.c</FileName>
@@ -668,9 +698,9 @@
               <FilePath>rt-thread\components\dfs\filesystems\devfs\devfs.c</FilePath>
             </File>
             <File>
-              <FileName>ff.c</FileName>
+              <FileName>dfs_elm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\components\dfs\filesystems\elmfat\ff.c</FilePath>
+              <FilePath>rt-thread\components\dfs\filesystems\elmfat\dfs_elm.c</FilePath>
             </File>
             <File>
               <FileName>ffunicode.c</FileName>
@@ -678,9 +708,9 @@
               <FilePath>rt-thread\components\dfs\filesystems\elmfat\ffunicode.c</FilePath>
             </File>
             <File>
-              <FileName>dfs_elm.c</FileName>
+              <FileName>ff.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\components\dfs\filesystems\elmfat\dfs_elm.c</FilePath>
+              <FilePath>rt-thread\components\dfs\filesystems\elmfat\ff.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -693,14 +723,14 @@
               <FilePath>rt-thread\components\finsh\shell.c</FilePath>
             </File>
             <File>
-              <FileName>msh_file.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\finsh\msh_file.c</FilePath>
-            </File>
-            <File>
               <FileName>msh.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\finsh\msh.c</FilePath>
+            </File>
+            <File>
+              <FileName>msh_file.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\finsh\msh_file.c</FilePath>
             </File>
             <File>
               <FileName>cmd.c</FileName>
@@ -713,9 +743,14 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
-              <FileName>ipc.c</FileName>
+              <FileName>kservice.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\src\ipc.c</FilePath>
+              <FilePath>rt-thread\src\kservice.c</FilePath>
+            </File>
+            <File>
+              <FileName>thread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\thread.c</FilePath>
             </File>
             <File>
               <FileName>components.c</FileName>
@@ -728,24 +763,9 @@
               <FilePath>rt-thread\src\device.c</FilePath>
             </File>
             <File>
-              <FileName>mem.c</FileName>
+              <FileName>ipc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\src\mem.c</FilePath>
-            </File>
-            <File>
-              <FileName>kservice.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\kservice.c</FilePath>
-            </File>
-            <File>
-              <FileName>mempool.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\mempool.c</FilePath>
-            </File>
-            <File>
-              <FileName>timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\timer.c</FilePath>
+              <FilePath>rt-thread\src\ipc.c</FilePath>
             </File>
             <File>
               <FileName>object.c</FileName>
@@ -753,9 +773,14 @@
               <FilePath>rt-thread\src\object.c</FilePath>
             </File>
             <File>
-              <FileName>irq.c</FileName>
+              <FileName>mem.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\src\irq.c</FilePath>
+              <FilePath>rt-thread\src\mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\timer.c</FilePath>
             </File>
             <File>
               <FileName>idle.c</FileName>
@@ -763,25 +788,35 @@
               <FilePath>rt-thread\src\idle.c</FilePath>
             </File>
             <File>
-              <FileName>thread.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\thread.c</FilePath>
-            </File>
-            <File>
               <FileName>clock.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\src\clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>irq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\irq.c</FilePath>
             </File>
             <File>
               <FileName>scheduler.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\src\scheduler.c</FilePath>
             </File>
+            <File>
+              <FileName>mempool.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\mempool.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>libc</GroupName>
           <Files>
+            <File>
+              <FileName>syscalls.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\libc\compilers\armlibc\syscalls.c</FilePath>
+            </File>
             <File>
               <FileName>mem_std.c</FileName>
               <FileType>1</FileType>
@@ -793,14 +828,14 @@
               <FilePath>rt-thread\components\libc\compilers\armlibc\stdio.c</FilePath>
             </File>
             <File>
-              <FileName>syscalls.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\libc\compilers\armlibc\syscalls.c</FilePath>
-            </File>
-            <File>
               <FileName>libc.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\libc\compilers\armlibc\libc.c</FilePath>
+            </File>
+            <File>
+              <FileName>time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\libc\compilers\common\time.c</FilePath>
             </File>
             <File>
               <FileName>unistd.c</FileName>
@@ -812,105 +847,50 @@
               <FileType>1</FileType>
               <FilePath>rt-thread\components\libc\compilers\common\stdlib.c</FilePath>
             </File>
-            <File>
-              <FileName>time.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\libc\compilers\common\time.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>nrfx</GroupName>
           <Files>
             <File>
-              <FileName>nrfx_spim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spim.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_egu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_egu.c</FilePath>
-            </File>
-            <File>
               <FileName>nrfx_temp.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_temp.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_pwm.c</FileName>
+              <FileName>nrfx_gpiote.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_pwm.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_gpiote.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_nfct.c</FileName>
+              <FileName>nrfx_nvmc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_nfct.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_nvmc.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_timer.c</FileName>
+              <FileName>nrfx_comp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_timer.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_comp.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_wdt.c</FileName>
+              <FileName>nrfx_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_wdt.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spi.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_power.c</FileName>
+              <FileName>nrfx_rng.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_power.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_rng.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_twim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twim.c</FilePath>
             </File>
             <File>
               <FileName>nrfx_rtc.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_rtc.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_qspi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_qspi.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_pdm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_pdm.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_i2s.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_i2s.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_twi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twi.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_twi_twim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twi_twim.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_usbreg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_usbreg.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_saadc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_saadc.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_dppi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_dppi.c</FilePath>
             </File>
             <File>
               <FileName>nrfx_systick.c</FileName>
@@ -923,34 +903,39 @@
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_ppi.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_comp.c</FileName>
+              <FileName>nrfx_spis.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_comp.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spis.c</FilePath>
             </File>
             <File>
-              <FileName>arm_startup_nrf52840.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>packages\nrfx-v2.1.0\mdk\arm_startup_nrf52840.s</FilePath>
+              <FileName>nrfx_i2s.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_i2s.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_gpiote.c</FileName>
+              <FileName>nrfx_pwm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_gpiote.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_pwm.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_usbd.c</FileName>
+              <FileName>nrfx_dppi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_usbd.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_dppi.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_clock.c</FileName>
+              <FileName>nrfx_saadc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_clock.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_saadc.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_twis.c</FileName>
+              <FileName>nrfx_usbreg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twis.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_usbreg.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_adc.c</FilePath>
             </File>
             <File>
               <FileName>nrfx_ipc.c</FileName>
@@ -958,24 +943,24 @@
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_ipc.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_spi.c</FileName>
+              <FileName>nrfx_qdec.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spi.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_qdec.c</FilePath>
             </File>
             <File>
-              <FileName>system_nrf52840.c</FileName>
+              <FileName>nrfx_usbd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\mdk\system_nrf52840.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_usbd.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_nvmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_nvmc.c</FilePath>
+              <FileName>arm_startup_nrf52840.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>packages\nrfx-v2.1.0\mdk\arm_startup_nrf52840.s</FilePath>
             </File>
             <File>
-              <FileName>nrfx_spis.c</FileName>
+              <FileName>nrfx_timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spis.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_timer.c</FilePath>
             </File>
             <File>
               <FileName>nrfx_uarte.c</FileName>
@@ -983,14 +968,29 @@
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_uarte.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_rng.c</FileName>
+              <FileName>nrfx_twi_twim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_rng.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twi_twim.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_qdec.c</FileName>
+              <FileName>nrfx_egu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_qdec.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_egu.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_twis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twis.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_pdm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_pdm.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_uart.c</FilePath>
             </File>
             <File>
               <FileName>nrfx_lpcomp.c</FileName>
@@ -998,14 +998,44 @@
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_lpcomp.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_twim.c</FileName>
+              <FileName>system_nrf52840.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twim.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\mdk\system_nrf52840.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_uart.c</FileName>
+              <FileName>nrfx_qspi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_uart.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_qspi.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_twi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twi.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_power.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_power.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_spim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spim.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_nfct.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_nfct.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_wdt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_wdt.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1013,14 +1043,44 @@
           <GroupName>SOFTDEVICE</GroupName>
           <Files>
             <File>
-              <FileName>ble_conn_state.c</FileName>
+              <FileName>app_error_weak.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\common\ble_conn_state.c</FilePath>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_error_weak.c</FilePath>
             </File>
             <File>
-              <FileName>ble_bas.c</FileName>
+              <FileName>nrf_ble_gatt.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\ble_services\ble_bas\ble_bas.c</FilePath>
+              <FilePath>packages\nrf5x_sdk-latest\components\ble\nrf_ble_gatt\nrf_ble_gatt.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_srv_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\ble\common\ble_srv_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrf_strerror.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\strerror\nrf_strerror.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_advertising.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\ble\ble_advertising\ble_advertising.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_util_platform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_util_platform.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensorsim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\sensorsim\sensorsim.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrf_atflags.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\atomic_flags\nrf_atflags.c</FilePath>
             </File>
             <File>
               <FileName>ble_link_ctx_manager.c</FileName>
@@ -1038,29 +1098,14 @@
               <FilePath>packages\nrf5x_sdk-latest\components\softdevice\common\nrf_sdh.c</FilePath>
             </File>
             <File>
-              <FileName>ble_conn_params_rtt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\rtt_adapter\ble_conn_params_rtt.c</FilePath>
-            </File>
-            <File>
-              <FileName>app_error.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_error.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrf_ble_gatt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\nrf_ble_gatt\nrf_ble_gatt.c</FilePath>
-            </File>
-            <File>
-              <FileName>app_util_platform.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_util_platform.c</FilePath>
-            </File>
-            <File>
               <FileName>nrf_section_iter.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\nrf5x_sdk-latest\components\libraries\experimental_section_vars\nrf_section_iter.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_conn_params_rtt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\rtt_adapter\ble_conn_params_rtt.c</FilePath>
             </File>
             <File>
               <FileName>nrf_sdh_ble_rtt.c</FileName>
@@ -1068,9 +1113,19 @@
               <FilePath>packages\nrf5x_sdk-latest\rtt_adapter\nrf_sdh_ble_rtt.c</FilePath>
             </File>
             <File>
-              <FileName>nrf_atomic.c</FileName>
+              <FileName>nrf_ble_qwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\atomic\nrf_atomic.c</FilePath>
+              <FilePath>packages\nrf5x_sdk-latest\components\ble\nrf_ble_qwr\nrf_ble_qwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_error.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_error.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_conn_state.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\ble\common\ble_conn_state.c</FilePath>
             </File>
             <File>
               <FileName>nrf_drv_clock.c</FileName>
@@ -1078,54 +1133,9 @@
               <FilePath>packages\nrf5x_sdk-latest\integration\nrfx\legacy\nrf_drv_clock.c</FilePath>
             </File>
             <File>
-              <FileName>app_error_weak.c</FileName>
+              <FileName>nrf_atomic.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_error_weak.c</FilePath>
-            </File>
-            <File>
-              <FileName>ble_srv_common.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\common\ble_srv_common.c</FilePath>
-            </File>
-            <File>
-              <FileName>ble_dis.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\ble_services\ble_dis\ble_dis.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrf_strerror.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\strerror\nrf_strerror.c</FilePath>
-            </File>
-            <File>
-              <FileName>ble_advertising.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\ble_advertising\ble_advertising.c</FilePath>
-            </File>
-            <File>
-              <FileName>sensorsim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\sensorsim\sensorsim.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrf_atflags.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\atomic_flags\nrf_atflags.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrf_ble_qwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\nrf_ble_qwr\nrf_ble_qwr.c</FilePath>
-            </File>
-            <File>
-              <FileName>ble_app_hrs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\rtt_adapter\ble_app_hrs.c</FilePath>
-            </File>
-            <File>
-              <FileName>ble_hrs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\ble_services\ble_hrs\ble_hrs.c</FilePath>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\atomic\nrf_atomic.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1141,7 +1151,7 @@
         <TargetCommonOption>
           <Device>nRF52840_xxAA</Device>
           <Vendor>Nordic Semiconductor</Vendor>
-          <PackID>NordicSemiconductor.nRF_DeviceFamilyPack.8.38.0</PackID>
+          <PackID>NordicSemiconductor.nRF_DeviceFamilyPack.8.35.0</PackID>
           <PackURL>http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/</PackURL>
           <Cpu>IRAM(0x20000000,0x40000) IROM(0x00000000,0x100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -1509,14 +1519,44 @@
           <GroupName>Applications</GroupName>
           <Files>
             <File>
-              <FileName>sample.c</FileName>
+              <FileName>ble_app_hrs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>applications\sample.c</FilePath>
+              <FilePath>applications\ble_app_hrs.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_nus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ble_nus.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_dis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ble_dis.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_bas.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ble_bas.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_app_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ble_app_uart.c</FilePath>
             </File>
             <File>
               <FileName>application.c</FileName>
               <FileType>1</FileType>
               <FilePath>applications\application.c</FilePath>
+            </File>
+            <File>
+              <FileName>sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_hrs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ble_hrs.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1529,24 +1569,24 @@
               <FilePath>rt-thread\libcpu\arm\common\div0.c</FilePath>
             </File>
             <File>
-              <FileName>showmem.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\libcpu\arm\common\showmem.c</FilePath>
-            </File>
-            <File>
               <FileName>backtrace.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\libcpu\arm\common\backtrace.c</FilePath>
             </File>
             <File>
-              <FileName>cpuport.c</FileName>
+              <FileName>showmem.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\libcpu\arm\cortex-m4\cpuport.c</FilePath>
+              <FilePath>rt-thread\libcpu\arm\common\showmem.c</FilePath>
             </File>
             <File>
               <FileName>context_rvds.S</FileName>
               <FileType>2</FileType>
               <FilePath>rt-thread\libcpu\arm\cortex-m4\context_rvds.S</FilePath>
+            </File>
+            <File>
+              <FileName>cpuport.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\libcpu\arm\cortex-m4\cpuport.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1599,19 +1639,9 @@
               <FilePath>rt-thread\components\drivers\spi\spi_flash_sfud.c</FilePath>
             </File>
             <File>
-              <FileName>dataqueue.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\src\dataqueue.c</FilePath>
-            </File>
-            <File>
               <FileName>waitqueue.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\drivers\src\waitqueue.c</FilePath>
-            </File>
-            <File>
-              <FileName>workqueue.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\src\workqueue.c</FilePath>
             </File>
             <File>
               <FileName>ringblk_buf.c</FileName>
@@ -1619,9 +1649,14 @@
               <FilePath>rt-thread\components\drivers\src\ringblk_buf.c</FilePath>
             </File>
             <File>
-              <FileName>pipe.c</FileName>
+              <FileName>completion.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\src\pipe.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\completion.c</FilePath>
+            </File>
+            <File>
+              <FileName>dataqueue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\src\dataqueue.c</FilePath>
             </File>
             <File>
               <FileName>ringbuffer.c</FileName>
@@ -1629,9 +1664,14 @@
               <FilePath>rt-thread\components\drivers\src\ringbuffer.c</FilePath>
             </File>
             <File>
-              <FileName>completion.c</FileName>
+              <FileName>workqueue.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\src\completion.c</FilePath>
+              <FilePath>rt-thread\components\drivers\src\workqueue.c</FilePath>
+            </File>
+            <File>
+              <FileName>pipe.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\src\pipe.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1639,9 +1679,9 @@
           <GroupName>Drivers</GroupName>
           <Files>
             <File>
-              <FileName>sdcard.c</FileName>
+              <FileName>w25q16.c</FileName>
               <FileType>1</FileType>
-              <FilePath>board\sdcard.c</FilePath>
+              <FilePath>board\w25q16.c</FilePath>
             </File>
             <File>
               <FileName>board.c</FileName>
@@ -1724,9 +1764,9 @@
               <FilePath>rt-thread\components\dfs\filesystems\devfs\devfs.c</FilePath>
             </File>
             <File>
-              <FileName>ff.c</FileName>
+              <FileName>dfs_elm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\components\dfs\filesystems\elmfat\ff.c</FilePath>
+              <FilePath>rt-thread\components\dfs\filesystems\elmfat\dfs_elm.c</FilePath>
             </File>
             <File>
               <FileName>ffunicode.c</FileName>
@@ -1734,9 +1774,9 @@
               <FilePath>rt-thread\components\dfs\filesystems\elmfat\ffunicode.c</FilePath>
             </File>
             <File>
-              <FileName>dfs_elm.c</FileName>
+              <FileName>ff.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\components\dfs\filesystems\elmfat\dfs_elm.c</FilePath>
+              <FilePath>rt-thread\components\dfs\filesystems\elmfat\ff.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1749,14 +1789,14 @@
               <FilePath>rt-thread\components\finsh\shell.c</FilePath>
             </File>
             <File>
-              <FileName>msh_file.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\finsh\msh_file.c</FilePath>
-            </File>
-            <File>
               <FileName>msh.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\finsh\msh.c</FilePath>
+            </File>
+            <File>
+              <FileName>msh_file.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\finsh\msh_file.c</FilePath>
             </File>
             <File>
               <FileName>cmd.c</FileName>
@@ -1769,9 +1809,14 @@
           <GroupName>Kernel</GroupName>
           <Files>
             <File>
-              <FileName>ipc.c</FileName>
+              <FileName>kservice.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\src\ipc.c</FilePath>
+              <FilePath>rt-thread\src\kservice.c</FilePath>
+            </File>
+            <File>
+              <FileName>thread.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\thread.c</FilePath>
             </File>
             <File>
               <FileName>components.c</FileName>
@@ -1784,24 +1829,9 @@
               <FilePath>rt-thread\src\device.c</FilePath>
             </File>
             <File>
-              <FileName>mem.c</FileName>
+              <FileName>ipc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\src\mem.c</FilePath>
-            </File>
-            <File>
-              <FileName>kservice.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\kservice.c</FilePath>
-            </File>
-            <File>
-              <FileName>mempool.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\mempool.c</FilePath>
-            </File>
-            <File>
-              <FileName>timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\timer.c</FilePath>
+              <FilePath>rt-thread\src\ipc.c</FilePath>
             </File>
             <File>
               <FileName>object.c</FileName>
@@ -1809,9 +1839,14 @@
               <FilePath>rt-thread\src\object.c</FilePath>
             </File>
             <File>
-              <FileName>irq.c</FileName>
+              <FileName>mem.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\src\irq.c</FilePath>
+              <FilePath>rt-thread\src\mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\timer.c</FilePath>
             </File>
             <File>
               <FileName>idle.c</FileName>
@@ -1819,25 +1854,35 @@
               <FilePath>rt-thread\src\idle.c</FilePath>
             </File>
             <File>
-              <FileName>thread.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\src\thread.c</FilePath>
-            </File>
-            <File>
               <FileName>clock.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\src\clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>irq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\irq.c</FilePath>
             </File>
             <File>
               <FileName>scheduler.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\src\scheduler.c</FilePath>
             </File>
+            <File>
+              <FileName>mempool.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\src\mempool.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>libc</GroupName>
           <Files>
+            <File>
+              <FileName>syscalls.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\libc\compilers\armlibc\syscalls.c</FilePath>
+            </File>
             <File>
               <FileName>mem_std.c</FileName>
               <FileType>1</FileType>
@@ -1849,14 +1894,14 @@
               <FilePath>rt-thread\components\libc\compilers\armlibc\stdio.c</FilePath>
             </File>
             <File>
-              <FileName>syscalls.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\libc\compilers\armlibc\syscalls.c</FilePath>
-            </File>
-            <File>
               <FileName>libc.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\libc\compilers\armlibc\libc.c</FilePath>
+            </File>
+            <File>
+              <FileName>time.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\libc\compilers\common\time.c</FilePath>
             </File>
             <File>
               <FileName>unistd.c</FileName>
@@ -1868,105 +1913,50 @@
               <FileType>1</FileType>
               <FilePath>rt-thread\components\libc\compilers\common\stdlib.c</FilePath>
             </File>
-            <File>
-              <FileName>time.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\libc\compilers\common\time.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>nrfx</GroupName>
           <Files>
             <File>
-              <FileName>nrfx_spim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spim.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_egu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_egu.c</FilePath>
-            </File>
-            <File>
               <FileName>nrfx_temp.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_temp.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_pwm.c</FileName>
+              <FileName>nrfx_gpiote.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_pwm.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_gpiote.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_nfct.c</FileName>
+              <FileName>nrfx_nvmc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_nfct.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_nvmc.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_timer.c</FileName>
+              <FileName>nrfx_comp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_timer.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_comp.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_wdt.c</FileName>
+              <FileName>nrfx_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_wdt.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spi.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_power.c</FileName>
+              <FileName>nrfx_rng.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_power.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_rng.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_twim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twim.c</FilePath>
             </File>
             <File>
               <FileName>nrfx_rtc.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_rtc.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_qspi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_qspi.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_pdm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_pdm.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_i2s.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_i2s.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_twi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twi.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_twi_twim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twi_twim.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_usbreg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_usbreg.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_saadc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_saadc.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrfx_dppi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_dppi.c</FilePath>
             </File>
             <File>
               <FileName>nrfx_systick.c</FileName>
@@ -1979,34 +1969,39 @@
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_ppi.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_comp.c</FileName>
+              <FileName>nrfx_spis.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_comp.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spis.c</FilePath>
             </File>
             <File>
-              <FileName>arm_startup_nrf52840.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>packages\nrfx-v2.1.0\mdk\arm_startup_nrf52840.s</FilePath>
+              <FileName>nrfx_i2s.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_i2s.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_gpiote.c</FileName>
+              <FileName>nrfx_pwm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_gpiote.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_pwm.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_usbd.c</FileName>
+              <FileName>nrfx_dppi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_usbd.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_dppi.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_clock.c</FileName>
+              <FileName>nrfx_saadc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_clock.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_saadc.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_twis.c</FileName>
+              <FileName>nrfx_usbreg.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twis.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_usbreg.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_adc.c</FilePath>
             </File>
             <File>
               <FileName>nrfx_ipc.c</FileName>
@@ -2014,24 +2009,24 @@
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_ipc.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_spi.c</FileName>
+              <FileName>nrfx_qdec.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spi.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_qdec.c</FilePath>
             </File>
             <File>
-              <FileName>system_nrf52840.c</FileName>
+              <FileName>nrfx_usbd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\mdk\system_nrf52840.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_usbd.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_nvmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_nvmc.c</FilePath>
+              <FileName>arm_startup_nrf52840.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>packages\nrfx-v2.1.0\mdk\arm_startup_nrf52840.s</FilePath>
             </File>
             <File>
-              <FileName>nrfx_spis.c</FileName>
+              <FileName>nrfx_timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spis.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_timer.c</FilePath>
             </File>
             <File>
               <FileName>nrfx_uarte.c</FileName>
@@ -2039,14 +2034,29 @@
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_uarte.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_rng.c</FileName>
+              <FileName>nrfx_twi_twim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_rng.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twi_twim.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_qdec.c</FileName>
+              <FileName>nrfx_egu.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_qdec.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_egu.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_twis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twis.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_pdm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_pdm.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_uart.c</FilePath>
             </File>
             <File>
               <FileName>nrfx_lpcomp.c</FileName>
@@ -2054,14 +2064,44 @@
               <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_lpcomp.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_twim.c</FileName>
+              <FileName>system_nrf52840.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twim.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\mdk\system_nrf52840.c</FilePath>
             </File>
             <File>
-              <FileName>nrfx_uart.c</FileName>
+              <FileName>nrfx_qspi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_uart.c</FilePath>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_qspi.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_twi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_twi.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_power.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_power.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_spim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_spim.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_nfct.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_nfct.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrfx_wdt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrfx-v2.1.0\drivers\src\nrfx_wdt.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2069,14 +2109,44 @@
           <GroupName>SOFTDEVICE</GroupName>
           <Files>
             <File>
-              <FileName>ble_conn_state.c</FileName>
+              <FileName>app_error_weak.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\common\ble_conn_state.c</FilePath>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_error_weak.c</FilePath>
             </File>
             <File>
-              <FileName>ble_bas.c</FileName>
+              <FileName>nrf_ble_gatt.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\ble_services\ble_bas\ble_bas.c</FilePath>
+              <FilePath>packages\nrf5x_sdk-latest\components\ble\nrf_ble_gatt\nrf_ble_gatt.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_srv_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\ble\common\ble_srv_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrf_strerror.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\strerror\nrf_strerror.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_advertising.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\ble\ble_advertising\ble_advertising.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_util_platform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_util_platform.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensorsim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\sensorsim\sensorsim.c</FilePath>
+            </File>
+            <File>
+              <FileName>nrf_atflags.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\atomic_flags\nrf_atflags.c</FilePath>
             </File>
             <File>
               <FileName>ble_link_ctx_manager.c</FileName>
@@ -2094,29 +2164,14 @@
               <FilePath>packages\nrf5x_sdk-latest\components\softdevice\common\nrf_sdh.c</FilePath>
             </File>
             <File>
-              <FileName>ble_conn_params_rtt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\rtt_adapter\ble_conn_params_rtt.c</FilePath>
-            </File>
-            <File>
-              <FileName>app_error.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_error.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrf_ble_gatt.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\nrf_ble_gatt\nrf_ble_gatt.c</FilePath>
-            </File>
-            <File>
-              <FileName>app_util_platform.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_util_platform.c</FilePath>
-            </File>
-            <File>
               <FileName>nrf_section_iter.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\nrf5x_sdk-latest\components\libraries\experimental_section_vars\nrf_section_iter.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_conn_params_rtt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\rtt_adapter\ble_conn_params_rtt.c</FilePath>
             </File>
             <File>
               <FileName>nrf_sdh_ble_rtt.c</FileName>
@@ -2124,9 +2179,19 @@
               <FilePath>packages\nrf5x_sdk-latest\rtt_adapter\nrf_sdh_ble_rtt.c</FilePath>
             </File>
             <File>
-              <FileName>nrf_atomic.c</FileName>
+              <FileName>nrf_ble_qwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\atomic\nrf_atomic.c</FilePath>
+              <FilePath>packages\nrf5x_sdk-latest\components\ble\nrf_ble_qwr\nrf_ble_qwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>app_error.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_error.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_conn_state.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\nrf5x_sdk-latest\components\ble\common\ble_conn_state.c</FilePath>
             </File>
             <File>
               <FileName>nrf_drv_clock.c</FileName>
@@ -2134,54 +2199,9 @@
               <FilePath>packages\nrf5x_sdk-latest\integration\nrfx\legacy\nrf_drv_clock.c</FilePath>
             </File>
             <File>
-              <FileName>app_error_weak.c</FileName>
+              <FileName>nrf_atomic.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\util\app_error_weak.c</FilePath>
-            </File>
-            <File>
-              <FileName>ble_srv_common.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\common\ble_srv_common.c</FilePath>
-            </File>
-            <File>
-              <FileName>ble_dis.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\ble_services\ble_dis\ble_dis.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrf_strerror.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\strerror\nrf_strerror.c</FilePath>
-            </File>
-            <File>
-              <FileName>ble_advertising.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\ble_advertising\ble_advertising.c</FilePath>
-            </File>
-            <File>
-              <FileName>sensorsim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\sensorsim\sensorsim.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrf_atflags.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\libraries\atomic_flags\nrf_atflags.c</FilePath>
-            </File>
-            <File>
-              <FileName>nrf_ble_qwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\nrf_ble_qwr\nrf_ble_qwr.c</FilePath>
-            </File>
-            <File>
-              <FileName>ble_app_hrs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\rtt_adapter\ble_app_hrs.c</FilePath>
-            </File>
-            <File>
-              <FileName>ble_hrs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\nrf5x_sdk-latest\components\ble\ble_services\ble_hrs\ble_hrs.c</FilePath>
+              <FilePath>packages\nrf5x_sdk-latest\components\libraries\atomic\nrf_atomic.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2194,5 +2214,14 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>project</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

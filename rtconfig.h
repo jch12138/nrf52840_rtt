@@ -222,7 +222,7 @@
 /* Onboard Peripheral Drivers */
 
 #define BSP_USING_JLINK_TO_USART
-#define BSP_USING_SDCARD
+#define BSP_USING_FLASH
 
 /* On-chip Peripheral Drivers */
 
