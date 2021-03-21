@@ -12,6 +12,7 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <drivers/serial.h>
+#include <drv_adc.h>
 
 #include "sdk_config.h"
 #include "nordic_common.h"
@@ -37,6 +38,11 @@
 #include "ble_nus.h"
 #include "ipc/ringbuffer.h"
 
+#define DBG_SECTION_NAME "BLE"
+#define DBG_COLOR
+#define DBG_LEVEL DBG_LOG
+#include <rtdbg.h>
+
 
 #define DEVICE_NAME                         "PluseMonitor"                            /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                   "NordicSemiconductor"                   /**< Manufacturer. Will be passed to Device Information Service. */
@@ -49,17 +55,17 @@
 #define APP_BLE_CONN_CFG_TAG                1                                       /**< A tag identifying the SoftDevice BLE configuration. */
 #define APP_BLE_OBSERVER_PRIO               3                                       /**< Application's BLE observer priority. You shouldn't need to modify this value. */
 
-#define BATTERY_LEVEL_MEAS_INTERVAL         APP_TIMER_TICKS(2000)                   /**< Battery level measurement interval (ticks). */
+//#define BATTERY_LEVEL_MEAS_INTERVAL         APP_TIMER_TICKS(2000)                   /**< Battery level measurement interval (ticks). */
 #define MIN_BATTERY_LEVEL                   81                                      /**< Minimum simulated battery level. */
 #define MAX_BATTERY_LEVEL                   100                                     /**< Maximum simulated 7battery level. */
 #define BATTERY_LEVEL_INCREMENT             1                                       /**< Increment between each simulated battery level measurement. */
 
-#define HEART_RATE_MEAS_INTERVAL            APP_TIMER_TICKS(20)                   /**< Heart rate measurement interval (ticks). */
+//#define HEART_RATE_MEAS_INTERVAL            APP_TIMER_TICKS(20)                   /**< Heart rate measurement interval (ticks). */
 #define MIN_HEART_RATE                      140                                     /**< Minimum heart rate as returned by the simulated measurement function. */
 #define MAX_HEART_RATE                      300                                     /**< Maximum heart rate as returned by the simulated measurement function. */
 #define HEART_RATE_INCREMENT                10                                      /**< Value by which the heart rate is incremented/decremented for each call to the simulated measurement function. */
 
-#define RR_INTERVAL_INTERVAL                APP_TIMER_TICKS(300)                    /**< RR interval interval (ticks). */
+//define RR_INTERVAL_INTERVAL                APP_TIMER_TICKS(300)                    /**< RR interval interval (ticks). */
 #define MIN_RR_INTERVAL                     100                                     /**< Minimum RR interval as returned by the simulated measurement function. */
 #define MAX_RR_INTERVAL                     500                                     /**< Maximum RR interval as returned by the simulated measurement function. */
 #define RR_INTERVAL_INCREMENT               1                                       /**< Value by which the RR interval is incremented/decremented for each call to the simulated measurement function. */
@@ -91,7 +97,7 @@
 
 BLE_HRS_DEF(m_hrs);                                                 /**< Heart rate service instance. */
 BLE_BAS_DEF(m_bas);                                                 /**< Structure used to identify the battery service. */
-BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT);                                   /**< BLE NUS service instance. */
+BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT);                   /**< BLE NUS service instance. */
 NRF_BLE_GATT_DEF(m_gatt);                                           /**< GATT module instance. */
 NRF_BLE_QWR_DEF(m_qwr);                                             /**< Context for the Queued Write module.*/
 BLE_ADVERTISING_DEF(m_advertising);                                 /**< Advertising module instance. */
@@ -104,18 +110,8 @@ BLE_ADVERTISING_DEF(m_advertising);                                 /**< Adverti
 
 
 
-
-
-
-extern rt_uint32_t result1;
-
-
-
-
-
-
-
-
+extern rt_uint32_t result1,result2,result3;//ADC采样值
+extern rt_adc_device_t adc_dev;
 
 
 static uint16_t m_conn_handle         = BLE_CONN_HANDLE_INVALID;    /**< Handle of the current connection. */
@@ -147,7 +143,10 @@ static struct rt_ringbuffer ringbuffer_putc_handler;
 static rt_uint8_t ringbuffer_putc[1024] = {0};
 static void advertising_start(void);
 
+static uint8_t testvalue = 1;
+static uint16_t testlen = 1;
 
+static rt_timer_t update;
 /**@brief Function for handling BLE events.
  *
  * @param[in]   p_ble_evt   Bluetooth stack event.
@@ -415,6 +414,41 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
         rt_kprintf("\r\n");
         rt_ringbuffer_putchar(&ringbuffer_handler, '\n');
         uart_software_intterrupt();
+        switch (p_evt->params.rx_data.p_data[0])
+        {
+        case 'A':
+            hrs_tf_on();
+            LOG_I("start transport sample...");
+            break;
+        case 'B':
+            hrs_tf_off();
+            LOG_I("start transport sample...");
+            break;
+        case 'C':
+            //开始采样存储数据接口
+            LOG_I("start recording sample...");
+            break;
+        case 'D':
+            //结束采样
+            LOG_I("start transport sample...");
+            break;
+        case 'E':
+            //查询当前文件
+            LOG_I("start transport sample...");
+            break;
+        
+        case 'F':
+            //要求传输指定文件
+            LOG_I("start transport sample...");
+            break;
+          
+        case 'R':
+            //重启设备
+            rt_hw_cpu_reset();
+            break;      
+        default:
+            break;
+        }
         
         // ble_nus_data_send(&m_nus, (uint8_t *)p_evt->params.rx_data.p_data, &p_evt->params.rx_data.length, m_conn_handle);
     }
@@ -422,7 +456,7 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
 
 }
 
-
+//移植未成功，用于主要是实现电脑串口->nrf52840->上位机发送数据，不影响使用
 static void uart_task(void *param)
 {
     uint16_t data_len = 0;
@@ -595,20 +629,40 @@ static void ble_app_softdevice(void *param)
     services_init();
     advertising_init();
     conn_params_init();
-    rt_kprintf("hrs example started.\r\n");
+    rt_kprintf("\r\nhrs example started.\r\n");
     advertising_start();
+ 
 }
 
 static void timeout(void *param)
 {
-    static int i = 0;
-    i++;
+    result1 = rt_adc_read(adc_dev, 5);
+//        rt_kprintf("saadc channel 0 value = %d, ",result); 
+    result2 = rt_adc_read(adc_dev, 6);
+//       rt_kprintf("saadc channel 1 value = %d \n",result);
+    result3 = rt_adc_read(adc_dev, 7);
+//        rt_kprintf("saadc channel 5 value = %d",result);  
+	//rt_kprintf("data: %d, %d, %d \n",result1,result2,result3);
+    //static int i = 0;
+    //i++;
     //ble_bas_battery_level_update(&m_bas, i % (MAX_BATTERY_LEVEL - MIN_BATTERY_LEVEL + 1) + MIN_BATTERY_LEVEL, BLE_CONN_HANDLE_ALL);
     ble_hrs_heart_rate_measurement_send(&m_hrs, (rt_uint16_t)result1);
+    //ble_nus_data_send(&m_nus, &testvalue, &testlen, m_conn_handle);
 }
 
-int ble_app_hrs(void)
+/**@brief Function for 初始化蓝牙协议栈.
+ */
+int ble_app_init(void)
 {
+    ble_stack_init();
+    gap_params_init();
+    gatt_init();
+    services_init();
+    advertising_init();
+    conn_params_init();
+    LOG_I("BLE started.");
+    advertising_start();
+    //上面是初始化蓝牙协议栈，下面是将本地串口与蓝牙串口连接
     rt_ringbuffer_init(&ringbuffer_handler, ringbuffer, sizeof(ringbuffer));
     rt_ringbuffer_init(&ringbuffer_putc_handler, ringbuffer_putc, sizeof(ringbuffer_putc));
     serial = rt_device_find(UART_NAME);
@@ -617,26 +671,62 @@ int ble_app_hrs(void)
         rt_kprintf("find %s failed!\n", UART_NAME);
         return -RT_ERROR;
     }
-    static rt_thread_t tid1 = RT_NULL;
-    tid1 = rt_thread_create("softdevice",
-                        ble_app_softdevice, RT_NULL,
-                        4096,
-                        22, 5);
-    if (tid1 != RT_NULL)
-        rt_thread_startup(tid1);
-    rt_timer_t update = rt_timer_create("update", timeout, RT_NULL, rt_tick_from_millisecond(20), RT_TIMER_FLAG_PERIODIC | RT_TIMER_FLAG_SOFT_TIMER);
+}
+MSH_CMD_EXPORT(ble_app_init, ble app start);
+INIT_APP_EXPORT(ble_app_init);
+
+
+/**@brief Function for .
+ *开启实时传输
+ */
+int hrs_tf_on(void)
+{
+    update = rt_timer_create("update", timeout, RT_NULL, rt_tick_from_millisecond(20), RT_TIMER_FLAG_PERIODIC | RT_TIMER_FLAG_SOFT_TIMER);
+    //启动定时器，20ms广播一次数据
     if (update != RT_NULL)
         rt_timer_start(update);
     return RT_EOK;
-    // tid1 = rt_thread_create("serial_task",
-    //                     uart_task, RT_NULL,
-    //                     1024,
-    //                     22, 5);
-    // if (tid1 != RT_NULL)
-    // {
-    //     rt_thread_startup(tid1);
-    // }
-    // return RT_EOK;
+
 }
-MSH_CMD_EXPORT(ble_app_hrs, ble app heart rate service);
-INIT_APP_EXPORT(ble_app_hrs);
+
+MSH_CMD_EXPORT(hrs_tf_on, transport realtime);
+int hrs_tf_off(void)
+{
+    rt_timer_delete(update);
+    return RT_EOK;
+}
+MSH_CMD_EXPORT(hrs_tf_off, stop transport);
+// int ble_app_hrs(void)
+// {
+//     rt_ringbuffer_init(&ringbuffer_handler, ringbuffer, sizeof(ringbuffer));
+//     rt_ringbuffer_init(&ringbuffer_putc_handler, ringbuffer_putc, sizeof(ringbuffer_putc));
+//     serial = rt_device_find(UART_NAME);
+//     if (!serial)
+//     {
+//         rt_kprintf("find %s failed!\n", UART_NAME);
+//         return -RT_ERROR;
+//     }
+//     static rt_thread_t tid1 = RT_NULL;
+//     tid1 = rt_thread_create("softdevice",
+//                         ble_app_softdevice, RT_NULL,
+//                         4096,
+//                         22, 5);
+//     if (tid1 != RT_NULL)
+//         rt_thread_startup(tid1);
+//     rt_timer_t update = rt_timer_create("update", timeout, RT_NULL, rt_tick_from_millisecond(20), RT_TIMER_FLAG_PERIODIC | RT_TIMER_FLAG_SOFT_TIMER);
+//     //启动定时器，20ms广播一次数据
+//     if (update != RT_NULL)
+//         rt_timer_start(update);
+//     return RT_EOK;
+//     // tid1 = rt_thread_create("serial_task",
+//     //                     uart_task, RT_NULL,
+//     //                     1024,
+//     //                     22, 5);
+//     // if (tid1 != RT_NULL)
+//     // {
+//     //     rt_thread_startup(tid1);
+//     // }
+//     //
+// }
+// MSH_CMD_EXPORT(ble_app_hrs, ble app heart rate service);
+// INIT_APP_EXPORT(ble_app_hrs);

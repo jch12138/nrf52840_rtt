@@ -235,7 +235,7 @@ ret_code_t nrf_sdh_ble_enable(uint32_t * const p_app_ram_start)
     }
     else
     {
-        rt_kprintf("RAM starts at 0x%x", app_ram_start_link);
+        rt_kprintf("RAM starts at 0x%x\r\n", app_ram_start_link);
         if (*p_app_ram_start != app_ram_start_link)
         {
             rt_kprintf("RAM start location can be adjusted to 0x%x.\r\n", *p_app_ram_start);
