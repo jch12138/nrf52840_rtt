@@ -10,6 +10,8 @@
  */
 
 #include <rtthread.h>
+#include <rtdevice.h>
+#include <drivers/serial.h>
 
 #include "sdk_config.h"
 #include "nordic_common.h"
@@ -32,11 +34,15 @@
 #include "ble_bas.h"
 #include "ble_hrs.h"
 #include "ble_dis.h"
+#include "ble_nus.h"
+#include "ipc/ringbuffer.h"
 
 
-#define DEVICE_NAME                         "Nordic_HRM"                            /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                         "PluseMonitor"                            /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                   "NordicSemiconductor"                   /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                    300                                     /**< The advertising interval (in units of 0.625 ms. This value corresponds to 187.5 ms). */
+
+#define NUS_SERVICE_UUID_TYPE           BLE_UUID_TYPE_VENDOR_BEGIN                  /**< UUID type for the Nordic UART Service (vendor specific). */
 
 #define APP_ADV_DURATION                    0                                       /**< The advertising duration (180 seconds) in units of 10 milliseconds. */
 
@@ -85,6 +91,7 @@
 
 BLE_HRS_DEF(m_hrs);                                                 /**< Heart rate service instance. */
 BLE_BAS_DEF(m_bas);                                                 /**< Structure used to identify the battery service. */
+BLE_NUS_DEF(m_nus, NRF_SDH_BLE_TOTAL_LINK_COUNT);                                   /**< BLE NUS service instance. */
 NRF_BLE_GATT_DEF(m_gatt);                                           /**< GATT module instance. */
 NRF_BLE_QWR_DEF(m_qwr);                                             /**< Context for the Queued Write module.*/
 BLE_ADVERTISING_DEF(m_advertising);                                 /**< Advertising module instance. */
@@ -123,12 +130,24 @@ static sensorsim_state_t m_rr_interval_sim_state;                   /**< RR Inte
 
 static ble_uuid_t m_adv_uuids[] =                                   /**< Universally unique service identifiers. */
 {
-    {BLE_UUID_HEART_RATE_SERVICE,           BLE_UUID_TYPE_BLE},
-//    {BLE_UUID_BATTERY_SERVICE,              BLE_UUID_TYPE_BLE},
-//    {BLE_UUID_DEVICE_INFORMATION_SERVICE,   BLE_UUID_TYPE_BLE}
+   {BLE_UUID_HEART_RATE_SERVICE,           BLE_UUID_TYPE_BLE},
+   {BLE_UUID_BATTERY_SERVICE,              BLE_UUID_TYPE_BLE},
+   {BLE_UUID_DEVICE_INFORMATION_SERVICE,   BLE_UUID_TYPE_BLE},
+   {BLE_UUID_NUS_SERVICE,                  BLE_UUID_TYPE_BLE}
 };
 
+
+static struct rt_ringbuffer ringbuffer_handler;
+static rt_uint8_t ringbuffer[1024] = {0};
+static rt_device_t serial;
+#define UART_NAME       "uart0"      /* 串口设备名称 */
+
+
+static struct rt_ringbuffer ringbuffer_putc_handler;
+static rt_uint8_t ringbuffer_putc[1024] = {0};
 static void advertising_start(void);
+
+
 /**@brief Function for handling BLE events.
  *
  * @param[in]   p_ble_evt   Bluetooth stack event.
@@ -376,12 +395,89 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
 }
 /**@brief Function for initializing services that will be used by the application.
  */
+static void uart_software_intterrupt(void)
+{
+    rt_hw_serial_isr((struct rt_serial_device *)serial, RT_SERIAL_EVENT_RX_IND);
+};
+static void nus_data_handler(ble_nus_evt_t * p_evt)
+{
+    if (p_evt->type == BLE_NUS_EVT_RX_DATA)
+    {
+//        uint32_t err_code;
+
+        rt_kprintf("Received data from BLE NUS. Writing data on UART.\r\n");
+        for(int i = 0; i < p_evt->params.rx_data.length; i++)
+        {
+            rt_kprintf("%c", p_evt->params.rx_data.p_data[i]);
+            rt_ringbuffer_putchar(&ringbuffer_handler, p_evt->params.rx_data.p_data[i]);
+            uart_software_intterrupt();
+        }
+        rt_kprintf("\r\n");
+        rt_ringbuffer_putchar(&ringbuffer_handler, '\n');
+        uart_software_intterrupt();
+        
+        // ble_nus_data_send(&m_nus, (uint8_t *)p_evt->params.rx_data.p_data, &p_evt->params.rx_data.length, m_conn_handle);
+    }
+
+
+}
+
+
+static void uart_task(void *param)
+{
+    uint16_t data_len = 0;
+    uint16_t onece_send_data_len = 50;
+
+    // 每隔1秒钟， 查询当前putc ringbuffer是否有数据需要发送
+    while (1)
+    {
+        data_len = rt_ringbuffer_data_len(&ringbuffer_putc_handler);
+        if (data_len > 0)
+        {
+            uint8_t *pdata = (uint8_t *)rt_malloc(data_len);
+            if(pdata == NULL)
+            {
+                rt_kprintf("malloc data failed, malloc len is %d\r\n", data_len);
+            }
+            else
+            {
+                // 内存分配成功
+                rt_ringbuffer_get(&ringbuffer_putc_handler, pdata, data_len);
+
+                // 将要发送的数据， 分次发送，每次发送onece_send_data_len数据
+                uint8_t count = 0;
+                uint16_t remainint_data = 0;
+                count = data_len / onece_send_data_len;
+                remainint_data = data_len % onece_send_data_len;
+
+                int i = 0;
+                for (i = 0; i < count; i++)
+                {
+                    ble_nus_data_send(&m_nus, pdata + i * onece_send_data_len, &onece_send_data_len, m_conn_handle);
+                    rt_thread_mdelay(200);
+                }
+                ble_nus_data_send(&m_nus, pdata + i * onece_send_data_len, &remainint_data, m_conn_handle);
+                rt_thread_mdelay(200);
+
+                // 释放内存
+                if (pdata != NULL)
+                {
+                    rt_free(pdata);
+                    pdata = NULL;
+                }
+            }
+        }
+        rt_thread_mdelay(1000);
+    }
+    
+}
 static void services_init(void)
 {
     ret_code_t         err_code;
-    ble_hrs_init_t     hrs_init;
+    ble_hrs_init_t     hrs_init;    
     ble_bas_init_t     bas_init;
     ble_dis_init_t     dis_init;
+    ble_nus_init_t     nus_init;    
     nrf_ble_qwr_init_t qwr_init = {0};
     uint8_t            body_sensor_location;
 
@@ -392,7 +488,7 @@ static void services_init(void)
     APP_ERROR_CHECK(err_code);
 
     // Initialize Heart Rate Service.
-    body_sensor_location = BLE_HRS_BODY_SENSOR_LOCATION_FINGER;
+    body_sensor_location = BLE_HRS_BODY_SENSOR_LOCATION_WRIST;
 
     memset(&hrs_init, 0, sizeof(hrs_init));
 
@@ -414,6 +510,13 @@ static void services_init(void)
     bas_init.support_notification = true;
     bas_init.p_report_ref         = NULL;
     bas_init.initial_batt_level   = 100;
+    // Initialize NUS.
+    memset(&nus_init, 0, sizeof(nus_init));
+
+    nus_init.data_handler = nus_data_handler;
+
+    err_code = ble_nus_init(&m_nus, &nus_init);
+    APP_ERROR_CHECK(err_code);
 
     // Here the sec level for the Battery Service can be changed/increased.
     bas_init.bl_rd_sec        = SEC_OPEN;
@@ -506,6 +609,14 @@ static void timeout(void *param)
 
 int ble_app_hrs(void)
 {
+    rt_ringbuffer_init(&ringbuffer_handler, ringbuffer, sizeof(ringbuffer));
+    rt_ringbuffer_init(&ringbuffer_putc_handler, ringbuffer_putc, sizeof(ringbuffer_putc));
+    serial = rt_device_find(UART_NAME);
+    if (!serial)
+    {
+        rt_kprintf("find %s failed!\n", UART_NAME);
+        return -RT_ERROR;
+    }
     static rt_thread_t tid1 = RT_NULL;
     tid1 = rt_thread_create("softdevice",
                         ble_app_softdevice, RT_NULL,
@@ -517,6 +628,15 @@ int ble_app_hrs(void)
     if (update != RT_NULL)
         rt_timer_start(update);
     return RT_EOK;
+    // tid1 = rt_thread_create("serial_task",
+    //                     uart_task, RT_NULL,
+    //                     1024,
+    //                     22, 5);
+    // if (tid1 != RT_NULL)
+    // {
+    //     rt_thread_startup(tid1);
+    // }
+    // return RT_EOK;
 }
 MSH_CMD_EXPORT(ble_app_hrs, ble app heart rate service);
 INIT_APP_EXPORT(ble_app_hrs);

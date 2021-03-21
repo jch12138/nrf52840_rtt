@@ -300,8 +300,8 @@
               </OCR_RVCT8>
               <OCR_RVCT9>
                 <Type>0</Type>
-                <StartAddress>0x20002ae8</StartAddress>
-                <Size>0x3d518</Size>
+                <StartAddress>0x20002d68</StartAddress>
+                <Size>0x3d298</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -337,7 +337,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--reduce_paths</MiscControls>
-              <Define>NRF52840_XXAA, SOFTDEVICE_PRESENT, __CLK_TCK=RT_TICK_PER_SECOND, __RTTHREAD__, CONFIG_GPIO_AS_PINRESET, USE_APP_CONFIG, RT_USING_ARM_LIBC</Define>
+              <Define>DEBUG NRF52840_XXAA, SOFTDEVICE_PRESENT, __CLK_TCK=RT_TICK_PER_SECOND, __RTTHREAD__, CONFIG_GPIO_AS_PINRESET, USE_APP_CONFIG, RT_USING_ARM_LIBC</Define>
               <Undefine></Undefine>
               <IncludePath>applications;.;libraries\cmsis\include;rt-thread\libcpu\arm\common;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\spi;rt-thread\components\drivers\include;rt-thread\components\drivers\spi\sfud\inc;rt-thread\components\drivers\include;board;libraries\drivers;packages\fastlz-v1.0.1;rt-thread\components\dfs\include;rt-thread\components\dfs\filesystems\devfs;rt-thread\components\dfs\filesystems\elmfat;rt-thread\components\finsh;.;rt-thread\include;rt-thread\components\libc\compilers\armlibc;rt-thread\components\libc\compilers\common;packages\nrfx-v2.1.0;packages\nrfx-v2.1.0\drivers;packages\nrfx-v2.1.0\drivers\include;packages\nrfx-v2.1.0\mdk;packages\nrfx-v2.1.0\hal;packages\nrf5x_sdk-latest\components\libraries\util;packages\nrf5x_sdk-latest\components\libraries\experimental_section_vars;packages\nrf5x_sdk-latest\components\libraries\log;packages\nrf5x_sdk-latest\components\libraries\log\src;packages\nrf5x_sdk-latest\components\libraries\strerror;packages\nrf5x_sdk-latest\components\libraries\memobj;packages\nrf5x_sdk-latest\components\libraries\balloc;packages\nrf5x_sdk-latest\components\libraries\atomic;packages\nrf5x_sdk-latest\components\libraries\atomic_flags;packages\nrf5x_sdk-latest\components\libraries\sensorsim;packages\nrf5x_sdk-latest\components\ble\ble_link_ctx_manager;packages\nrf5x_sdk-latest\components\ble\common;packages\nrf5x_sdk-latest\components\ble\ble_advertising;packages\nrf5x_sdk-latest\components\ble\nrf_ble_gatt;packages\nrf5x_sdk-latest\components\ble\nrf_ble_qwr;packages\nrf5x_sdk-latest\components\ble\ble_services\ble_lbs;packages\nrf5x_sdk-latest\components\softdevice\common;packages\nrf5x_sdk-latest\components\softdevice\s140\headers;packages\nrf5x_sdk-latest\components\softdevice\s140\headers\nrf52;packages\nrf5x_sdk-latest\integration\nrfx\legacy</IncludePath>
             </VariousControls>
@@ -404,11 +404,6 @@
               <FilePath>applications\ble_bas.c</FilePath>
             </File>
             <File>
-              <FileName>ble_app_uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>applications\ble_app_uart.c</FilePath>
-            </File>
-            <File>
               <FileName>application.c</FileName>
               <FileType>1</FileType>
               <FilePath>applications\application.c</FilePath>
@@ -422,6 +417,11 @@
               <FileName>ble_hrs.c</FileName>
               <FileType>1</FileType>
               <FilePath>applications\ble_hrs.c</FilePath>
+            </File>
+            <File>
+              <FileName>sdk_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\board\sdk_config.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1539,11 +1539,6 @@
               <FilePath>applications\ble_bas.c</FilePath>
             </File>
             <File>
-              <FileName>ble_app_uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>applications\ble_app_uart.c</FilePath>
-            </File>
-            <File>
               <FileName>application.c</FileName>
               <FileType>1</FileType>
               <FilePath>applications\application.c</FilePath>
@@ -1557,6 +1552,11 @@
               <FileName>ble_hrs.c</FileName>
               <FileType>1</FileType>
               <FilePath>applications\ble_hrs.c</FilePath>
+            </File>
+            <File>
+              <FileName>sdk_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\board\sdk_config.h</FilePath>
             </File>
           </Files>
         </Group>
