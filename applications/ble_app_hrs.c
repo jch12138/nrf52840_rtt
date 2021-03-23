@@ -684,6 +684,34 @@ INIT_APP_EXPORT(ble_app_init);
 
 //以下为串口接收到数据后操作的各个函数
 
+//int 转为char
+void Int_To_Str(int Int_i,char *String_s)
+{
+	int a;
+	int b= 0;	 								//用于计数
+	char *ptrfing,pBuffer[5];	//定义一个字符串数组和字符串指针，
+	ptrfing = String_s; 			//内部指针指向外部指针，进行参数传递，是属于源参数传递（通过地址），
+	if(Int_i< 10)		  				// 当整数小于10，转换为0x格式
+	{
+		*ptrfing ++ = '0'; 			//单个数字前面补0
+		*ptrfing ++ =Int_i+0x30;
+	}
+	else
+	{
+		while(Int_i> 0)
+		{
+			a= Int_i% 10;
+			Int_i=Int_i/ 10;
+			pBuffer[b++] =a+0x30;	// 通过计算把数字编成ASCII码形式
+		}
+		b-- ;
+		for(;b>= 0;b--) 		// 将得到的字符串倒序
+		{
+			*(ptrfing++) = pBuffer[b];
+		}
+	}
+	*ptrfing = '\0';
+}
 /**@brief Function for .
  *开启实时传输
  */
