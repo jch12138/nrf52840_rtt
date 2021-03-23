@@ -44,6 +44,9 @@
 #include <rtdbg.h>
 
 
+#include <dfs_posix.h>
+int fd,size;
+
 #define DEVICE_NAME                         "PluseMonitor"                            /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                   "NordicSemiconductor"                   /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                    300                                     /**< The advertising interval (in units of 0.625 ms. This value corresponds to 187.5 ms). */
@@ -426,6 +429,8 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
             break;
         case 'C':
             //开始采样存储数据接口
+            char *filename = '1616466979';
+            save_sample(filename);
             LOG_I("start recording sample...");
             break;
         case 'D':
@@ -676,9 +681,28 @@ MSH_CMD_EXPORT(ble_app_init, ble app start);
 INIT_APP_EXPORT(ble_app_init);
 
 
+
+//以下为串口接收到数据后操作的各个函数
+
 /**@brief Function for .
  *开启实时传输
  */
+
+static void timeout(void *param)
+{
+    result1 = rt_adc_read(adc_dev, 5);
+//        rt_kprintf("saadc channel 0 value = %d, ",result); 
+    result2 = rt_adc_read(adc_dev, 6);
+//       rt_kprintf("saadc channel 1 value = %d \n",result);
+    result3 = rt_adc_read(adc_dev, 7);
+//        rt_kprintf("saadc channel 5 value = %d",result);  
+	//rt_kprintf("data: %d, %d, %d \n",result1,result2,result3);
+    //static int i = 0;
+    //i++;
+    //ble_bas_battery_level_update(&m_bas, i % (MAX_BATTERY_LEVEL - MIN_BATTERY_LEVEL + 1) + MIN_BATTERY_LEVEL, BLE_CONN_HANDLE_ALL);
+    ble_hrs_heart_rate_measurement_send(&m_hrs, (rt_uint16_t)result1);
+    //ble_nus_data_send(&m_nus, &testvalue, &testlen, m_conn_handle);
+}
 int hrs_tf_on(void)
 {
     update = rt_timer_create("update", timeout, RT_NULL, rt_tick_from_millisecond(20), RT_TIMER_FLAG_PERIODIC | RT_TIMER_FLAG_SOFT_TIMER);
@@ -696,6 +720,34 @@ int hrs_tf_off(void)
     return RT_EOK;
 }
 MSH_CMD_EXPORT(hrs_tf_off, stop transport);
+
+int save_sample(char *filename)
+{
+    char *fname = '1616161616.txt';
+    fname = filename;
+    fd=  open(&fname, O_WRONLY | O_CREAT);
+    if(fd>0)
+    {
+        rt_kprintf('file creat and open successfully\r\n');
+    }
+    while(1)
+    {
+        result1 = rt_adc_read(adc_dev, 5);
+        result2 = rt_adc_read(adc_dev, 6);
+        result3 = rt_adc_read(adc_dev, 7);
+
+
+    }
+
+}
+MSH_CMD_EXPORT(save_sample, adcvalue save to file);
+
+int stop_save(void)
+{
+
+}
+MSH_CMD_EXPORT(stop_save, stop_save save adcvalue);
+
 // int ble_app_hrs(void)
 // {
 //     rt_ringbuffer_init(&ringbuffer_handler, ringbuffer, sizeof(ringbuffer));
