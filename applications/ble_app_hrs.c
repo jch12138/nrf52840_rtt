@@ -167,6 +167,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
             APP_ERROR_CHECK(err_code);
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
             err_code = nrf_ble_qwr_conn_handle_assign(&m_qwr, m_conn_handle);
+            //将连接句柄分配给队列写模块的给定实例的函数
             APP_ERROR_CHECK(err_code);
             break;
 
@@ -236,7 +237,7 @@ static void ble_stack_init(void)
 {
     ret_code_t err_code;
     uint32_t ram_start = 0;
-    err_code = nrf_sdh_enable_request();
+    err_code = nrf_sdh_enable_request();//协议栈回复是能回答，设置系统时钟
     APP_ERROR_CHECK(err_code);
 
     // Configure the BLE stack using the default settings.
@@ -250,6 +251,7 @@ static void ble_stack_init(void)
     APP_ERROR_CHECK(err_code);
     
     // Register a handler for BLE events.
+    //四个参数：观察者名，观察者处理事件优先级，蓝牙事件处理，事件处理程序参数
     NRF_SDH_BLE_OBSERVER(m_ble_observer, APP_BLE_OBSERVER_PRIO, ble_evt_handler, NULL);
 }
 /**@brief Function for handling advertising events.
@@ -353,12 +355,12 @@ static void gap_params_init(void)
     APP_ERROR_CHECK(err_code);
 
     memset(&gap_conn_params, 0, sizeof(gap_conn_params));
-
+    //连接参数配置
     gap_conn_params.min_conn_interval = MIN_CONN_INTERVAL;
     gap_conn_params.max_conn_interval = MAX_CONN_INTERVAL;
     gap_conn_params.slave_latency     = SLAVE_LATENCY;
     gap_conn_params.conn_sup_timeout  = CONN_SUP_TIMEOUT;
-
+    
     err_code = sd_ble_gap_ppcp_set(&gap_conn_params);
     APP_ERROR_CHECK(err_code);
 }

@@ -189,7 +189,7 @@ ret_code_t nrf_sdh_enable_request(void)
 
     m_nrf_sdh_continue = true;
 
-    // Notify observers about SoftDevice enable request.
+    // Notify observers about SoftDevice enable request.通知观察者，协议栈使能开始
     if (sdh_request_observer_notify(NRF_SDH_EVT_ENABLE_REQUEST) == NRF_ERROR_BUSY)
     {
         // Enable process was stopped.
@@ -198,12 +198,15 @@ ret_code_t nrf_sdh_enable_request(void)
 
     // Notify observers about starting SoftDevice enable process.
     sdh_state_observer_notify(NRF_SDH_EVT_STATE_ENABLE_PREPARE);
-
+    //配置时钟源
     nrf_clock_lf_cfg_t const clock_lf_cfg =
     {
+        //使用了外部晶振时钟
         .source       = NRF_SDH_CLOCK_LF_SRC,
         .rc_ctiv      = NRF_SDH_CLOCK_LF_RC_CTIV,
+        //晶振温度偏移
         .rc_temp_ctiv = NRF_SDH_CLOCK_LF_RC_TEMP_CTIV,
+        
         .accuracy     = NRF_SDH_CLOCK_LF_ACCURACY
     };
 

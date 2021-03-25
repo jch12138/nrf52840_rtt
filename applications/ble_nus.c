@@ -275,7 +275,7 @@ uint32_t ble_nus_init(ble_nus_t * p_nus, ble_nus_init_t const * p_nus_init)
 
     // Add the RX Characteristic.
     memset(&add_char_params, 0, sizeof(add_char_params));
-    add_char_params.uuid                     = BLE_UUID_NUS_RX_CHARACTERISTIC;
+    add_char_params.uuid                     = BLE_UUID_NUS_RX_CHARACTERISTIC;//0x02
     add_char_params.uuid_type                = p_nus->uuid_type;
     add_char_params.max_len                  = BLE_NUS_MAX_RX_CHAR_LEN;
     add_char_params.init_len                 = sizeof(uint8_t);
@@ -295,7 +295,7 @@ uint32_t ble_nus_init(ble_nus_t * p_nus, ble_nus_init_t const * p_nus_init)
     // Add the TX Characteristic.
     /**@snippet [Adding proprietary characteristic to the SoftDevice] */
     memset(&add_char_params, 0, sizeof(add_char_params));
-    add_char_params.uuid              = BLE_UUID_NUS_TX_CHARACTERISTIC;
+    add_char_params.uuid              = BLE_UUID_NUS_TX_CHARACTERISTIC;//0x03
     add_char_params.uuid_type         = p_nus->uuid_type;
     add_char_params.max_len           = BLE_NUS_MAX_TX_CHAR_LEN;
     add_char_params.init_len          = sizeof(uint8_t);
