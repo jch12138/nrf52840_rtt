@@ -115,6 +115,7 @@ BLE_ADVERTISING_DEF(m_advertising);                                 /**< Adverti
 
 extern rt_uint32_t result1,result2,result3;//ADC采样值
 extern rt_adc_device_t adc_dev;
+rt_uint8_t  result[6];
 
 
 static uint16_t m_conn_handle         = BLE_CONN_HANDLE_INVALID;    /**< Handle of the current connection. */
@@ -431,8 +432,7 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
             break;
         case 'C':
             //开始采样存储数据接口
-            char *filename = '1616466979';
-            save_sample(filename);
+            
             LOG_I("start recording sample...");
             break;
         case 'D':
@@ -641,21 +641,7 @@ static void ble_app_softdevice(void *param)
  
 }
 
-static void timeout(void *param)
-{
-    result1 = rt_adc_read(adc_dev, 5);
-//        rt_kprintf("saadc channel 0 value = %d, ",result); 
-    result2 = rt_adc_read(adc_dev, 6);
-//       rt_kprintf("saadc channel 1 value = %d \n",result);
-    result3 = rt_adc_read(adc_dev, 7);
-//        rt_kprintf("saadc channel 5 value = %d",result);  
-	//rt_kprintf("data: %d, %d, %d \n",result1,result2,result3);
-    //static int i = 0;
-    //i++;
-    //ble_bas_battery_level_update(&m_bas, i % (MAX_BATTERY_LEVEL - MIN_BATTERY_LEVEL + 1) + MIN_BATTERY_LEVEL, BLE_CONN_HANDLE_ALL);
-    ble_hrs_heart_rate_measurement_send(&m_hrs, (rt_uint16_t)result1);
-    //ble_nus_data_send(&m_nus, &testvalue, &testlen, m_conn_handle);
-}
+
 
 /**@brief Function for 初始化蓝牙协议栈.
  */
@@ -678,6 +664,7 @@ int ble_app_init(void)
         rt_kprintf("find %s failed!\n", UART_NAME);
         return -RT_ERROR;
     }
+		
 }
 MSH_CMD_EXPORT(ble_app_init, ble app start);
 INIT_APP_EXPORT(ble_app_init);
@@ -751,27 +738,50 @@ int hrs_tf_off(void)
 }
 MSH_CMD_EXPORT(hrs_tf_off, stop transport);
 
-int save_sample(char *filename)
+int savetest(void)
 {
-    char *fname = '1616161616.txt';
-    fname = filename;
-    fd=  open(&fname, O_WRONLY | O_CREAT);
+
+    fd=  open("\hello.hex", O_WRONLY | O_CREAT);
     if(fd>0)
     {
-        rt_kprintf('file creat and open successfully\r\n');
+        rt_kprintf("file creat and open successfully\r\n");
     }
-    while(1)
+    int count = 5;
+    while(count)
     {
+        count --;
         result1 = rt_adc_read(adc_dev, 5);
         result2 = rt_adc_read(adc_dev, 6);
         result3 = rt_adc_read(adc_dev, 7);
-
+        rt_kprintf("%d %d %d \r\n",result1,result2,result3);
+        result[0] = (result1>>8)&0xff;
+        result[1] =  result1&0xff;
+        result[2] = (result2>>8)&0xff;
+        result[3] =  result2&0xff;
+        result[4] = (result3>>8)&0xff;
+        result[5] =  result3&0xff;
+        rt_kprintf("%d %d %d %d %d %d \r\n",result[0],result[1],result[2],result[3],result[4],result[5]);
+        write(fd,result,6);
+        rt_thread_mdelay(100);
+        
 
     }
+    close(fd);
 
 }
-MSH_CMD_EXPORT(save_sample, adcvalue save to file);
-
+MSH_CMD_EXPORT(savetest, test adc save to file);
+int readtest()
+{   int size;
+    char buffer[40];
+    fd=  open("\hello.hex", O_RDONLY);
+    size = read(fd, buffer, sizeof(buffer));
+    for(int i=0;i<=30;i++)
+    {
+        rt_kprintf("%d ",buffer[i]);
+    }
+    rt_kprintf(" \r\nsize=%d",size);
+}
+MSH_CMD_EXPORT(readtest, test adc read to file);
 int stop_save(void)
 {
 
