@@ -128,7 +128,24 @@
           <Name>UL2CM3(-S0 -C0 -P0 )  -FN2 -FC4000 -FD20000000 -FF0nrf52xxx -FF1nrf52xxx_uicr -FL0200000 -FL11000 -FS00 -FS110001000 -FP0($$Device:nRF52840_xxAA$Flash\nrf52xxx.flm) -FP1($$Device:nRF52840_xxAA$Flash\nrf52xxx_uicr.flm)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>428</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>applications\ble_app_hrs.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+      </Breakpoint>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>

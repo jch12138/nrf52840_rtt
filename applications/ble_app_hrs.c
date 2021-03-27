@@ -46,6 +46,8 @@
 
 #include <dfs_posix.h>
 int fd,size;
+char file_name[20] = "0000000000000.hex"; 	//记录数据的文件名
+char time_stamp[14]= "0000000000000"; 					    //采样开始时的时间戳
 
 #define DEVICE_NAME                         "PluseMonitor"                            /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                   "NordicSemiconductor"                   /**< Manufacturer. Will be passed to Device Information Service. */
@@ -150,7 +152,47 @@ static void advertising_start(void);
 static uint8_t testvalue = 1;
 static uint16_t testlen = 1;
 
-static rt_timer_t update;
+static rt_timer_t update,saveadc;
+
+/**@brief Function for saveadcvalue.
+ *
+
+ */
+static void save_value(void *param)
+{
+        result1 = rt_adc_read(adc_dev, 5);
+        result2 = rt_adc_read(adc_dev, 6);
+        result3 = rt_adc_read(adc_dev, 7);
+        rt_kprintf("%d %d %d \r\n",result1,result2,result3);
+        result[0] = (result1>>8)&0xff;
+        result[1] =  result1&0xff;
+        result[2] = (result2>>8)&0xff;
+        result[3] =  result2&0xff;
+        result[4] = (result3>>8)&0xff;
+        result[5] =  result3&0xff;
+        rt_kprintf("%d %d %d %d %d %d \r\n",result[0],result[1],result[2],result[3],result[4],result[5]);
+        write(fd,result,6);
+        rt_kprintf("writesuccesss\r\n");
+
+}
+/**@brief Function for transforadcvalue.
+ *
+ */
+static void timeout(void *param)
+{
+    result1 = rt_adc_read(adc_dev, 5);
+//        rt_kprintf("saadc channel 0 value = %d, ",result); 
+    result2 = rt_adc_read(adc_dev, 6);
+//       rt_kprintf("saadc channel 1 value = %d \n",result);
+    result3 = rt_adc_read(adc_dev, 7);
+//        rt_kprintf("saadc channel 5 value = %d",result);  
+	//rt_kprintf("data: %d, %d, %d \n",result1,result2,result3);
+    //static int i = 0;
+    //i++;
+    //ble_bas_battery_level_update(&m_bas, i % (MAX_BATTERY_LEVEL - MIN_BATTERY_LEVEL + 1) + MIN_BATTERY_LEVEL, BLE_CONN_HANDLE_ALL);
+    ble_hrs_heart_rate_measurement_send(&m_hrs, (rt_uint16_t)result1);
+    //ble_nus_data_send(&m_nus, &testvalue, &testlen, m_conn_handle);
+}
 /**@brief Function for handling BLE events.
  *
  * @param[in]   p_ble_evt   Bluetooth stack event.
@@ -428,16 +470,36 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
             break;
         case 'B':
             hrs_tf_off();
-            LOG_I("start transport sample...");
+            LOG_I("stopls transport sample...");
             break;
         case 'C':
             //开始采样存储数据接口
-            
-            LOG_I("start recording sample...");
+			strcpy(time_stamp, (char *)(p_evt->params.rx_data.p_data)+1);
+			time_stamp[13] = '\0';
+			printf("start sampling, time: %s \r\n",time_stamp);
+			sprintf(file_name, "%s.hex", time_stamp); 	//将时间戳作为文件名
+            fd=  open(file_name, O_WRONLY | O_CREAT);
+            if(fd>0)
+            {
+            rt_kprintf("file creat and open successfully\r\n");
+            }
+            saveadc= rt_timer_create("saveadc", save_value, RT_NULL, rt_tick_from_millisecond(20), RT_TIMER_FLAG_PERIODIC | RT_TIMER_FLAG_SOFT_TIMER);
+            if (saveadc != RT_NULL)
+                rt_timer_start(saveadc);
+            LOG_I("start sample...");
+            // close(fd);     
+            // if(fd>0)
+            // {
+            // rt_kprintf("file closed and saved successfully\r\n");
+            // }
             break;
         case 'D':
             //结束采样
-            LOG_I("start transport sample...");
+            rt_timer_delete(saveadc);
+            if(fd>0)
+                close(fd);
+
+            LOG_I("stop sample...");
             break;
         case 'E':
             //查询当前文件
@@ -705,21 +767,7 @@ void Int_To_Str(int Int_i,char *String_s)
  *开启实时传输
  */
 
-static void timeout(void *param)
-{
-    result1 = rt_adc_read(adc_dev, 5);
-//        rt_kprintf("saadc channel 0 value = %d, ",result); 
-    result2 = rt_adc_read(adc_dev, 6);
-//       rt_kprintf("saadc channel 1 value = %d \n",result);
-    result3 = rt_adc_read(adc_dev, 7);
-//        rt_kprintf("saadc channel 5 value = %d",result);  
-	//rt_kprintf("data: %d, %d, %d \n",result1,result2,result3);
-    //static int i = 0;
-    //i++;
-    //ble_bas_battery_level_update(&m_bas, i % (MAX_BATTERY_LEVEL - MIN_BATTERY_LEVEL + 1) + MIN_BATTERY_LEVEL, BLE_CONN_HANDLE_ALL);
-    ble_hrs_heart_rate_measurement_send(&m_hrs, (rt_uint16_t)result1);
-    //ble_nus_data_send(&m_nus, &testvalue, &testlen, m_conn_handle);
-}
+
 int hrs_tf_on(void)
 {
     update = rt_timer_create("update", timeout, RT_NULL, rt_tick_from_millisecond(20), RT_TIMER_FLAG_PERIODIC | RT_TIMER_FLAG_SOFT_TIMER);
@@ -746,27 +794,30 @@ int savetest(void)
     {
         rt_kprintf("file creat and open successfully\r\n");
     }
-    int count = 5;
+    int32_t timestart=rt_tick_get();
+    int count = 10000;
     while(count)
     {
         count --;
         result1 = rt_adc_read(adc_dev, 5);
         result2 = rt_adc_read(adc_dev, 6);
         result3 = rt_adc_read(adc_dev, 7);
-        rt_kprintf("%d %d %d \r\n",result1,result2,result3);
+        //rt_kprintf("%d %d %d \r\n",result1,result2,result3);
         result[0] = (result1>>8)&0xff;
         result[1] =  result1&0xff;
         result[2] = (result2>>8)&0xff;
         result[3] =  result2&0xff;
         result[4] = (result3>>8)&0xff;
         result[5] =  result3&0xff;
-        rt_kprintf("%d %d %d %d %d %d \r\n",result[0],result[1],result[2],result[3],result[4],result[5]);
+        //rt_kprintf("%d %d %d %d %d %d \r\n",result[0],result[1],result[2],result[3],result[4],result[5]);
         write(fd,result,6);
-        rt_thread_mdelay(100);
+        rt_thread_mdelay(20);
         
 
     }
+    int32_t timestop=rt_tick_get();
     close(fd);
+    rt_kprintf("usetime = %d\r\n",timestop-timestart);
 
 }
 MSH_CMD_EXPORT(savetest, test adc save to file);
