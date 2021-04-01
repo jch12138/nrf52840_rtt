@@ -13,5 +13,10 @@
   "path": "/packages/misc/fastlz", 
   "ver": "v1.0.1", 
   "name": "FASTLZ"
+ }, 
+ {
+  "path": "/packages/misc/crclib", 
+  "ver": "v1.00", 
+  "name": "CRCLIB"
  }
 ]

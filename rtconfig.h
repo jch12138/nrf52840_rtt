@@ -186,11 +186,9 @@
 #define NRF_BLE_CONN_PARAMS_MAX_SLAVE_LATENCY_DEVIATION 499
 #define NRF_BLE_CONN_PARAMS_MAX_SUPERVISION_TIMEOUT_DEVIATION 65535
 #define NRF_BLE_GATT_ENABLED 1
+#define SD_BLE_APP_UART
+#define BLE_NUS_ENABLED 1
 #define NRF_SDH_BLE_GATT_MAX_MTU_SIZE 247
-#define SD_BLE_APP_HRS
-#define BLE_HRS_ENABLED 1
-#define BLE_DIS_ENABLED 1
-#define BLE_BAS_ENABLED 1
 #define PKG_USING_NRF5X_SDK_LATEST_VERSION
 #define PKG_USING_NRFX
 #define PKG_USING_NRFX_V210
@@ -207,8 +205,14 @@
 
 /* samples: kernel and components samples */
 
+#define PKG_USING_CRCLIB
+#define CRCLIB_USING_CRC8
+#define CRC8_USING_CONST_TABLE
+#define CRC8_POLY_8C
+#define CRC8_POLY 140
+#define PKG_USING_CRCLIB_V100
 
-/* games: games run on RT-Thread console */
+/* entertainment: terminal games and other interesting software packages */
 
 
 /* Hardware Drivers Config */

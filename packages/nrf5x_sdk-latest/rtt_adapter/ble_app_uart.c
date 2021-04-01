@@ -31,9 +31,18 @@
 #include "ble_advertising.h"
 #include "ipc/ringbuffer.h"
 
+#define DBG_SECTION_NAME "BLE"
+#define DBG_COLOR
+#define DBG_LEVEL DBG_LOG
+#include <rtdbg.h>
+
+
+#include <dfs_posix.h>
+
+
 #define APP_BLE_CONN_CFG_TAG            1                                           /**< A tag identifying the SoftDevice BLE configuration. */
 
-#define DEVICE_NAME                     "Nordic_UART"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                     "Pluse"                               /**< Name of device. Will be included in the advertising data. */
 #define NUS_SERVICE_UUID_TYPE           BLE_UUID_TYPE_VENDOR_BEGIN                  /**< UUID type for the Nordic UART Service (vendor specific). */
 
 #define APP_BLE_OBSERVER_PRIO           3                                           /**< Application's BLE observer priority. You shouldn't need to modify this value. */
@@ -79,14 +88,81 @@ static rt_uint8_t ringbuffer[1024] = {0};
 static rt_device_t serial;
 #define UART_NAME       "uart0"      /* 串口设备名称 */
 
+extern rt_uint32_t result1,result2,result3;//ADC采样值
+extern rt_adc_device_t adc_dev;
+rt_uint8_t  result[6];
+
+int fd,size;
+char file_name[20] = "0000000000000.hex"; 	//记录数据的文件名
+char time_stamp[14]= "0000000000000"; 					    //采样开始时的时间戳
 
 static struct rt_ringbuffer ringbuffer_putc_handler;
 static rt_uint8_t ringbuffer_putc[1024] = {0};
+static rt_thread_t savedate = NULL;
+static rt_thread_t sendfile = NULL;
+static rt_timer_t update;
 
+/**@brief Function for saveadcvalue.
+ *
+
+ */
+static void save_date(void *param)
+{
+        result1 = rt_adc_read(adc_dev, 5);
+        result2 = rt_adc_read(adc_dev, 6);
+        result3 = rt_adc_read(adc_dev, 7);
+        rt_kprintf("%d %d %d \r\n",result1,result2,result3);
+        result[0] = (result1>>8)&0xff;
+        result[1] =  result1&0xff;
+        result[2] = (result2>>8)&0xff;
+        result[3] =  result2&0xff;
+        result[4] = (result3>>8)&0xff;
+        result[5] =  result3&0xff;
+        rt_kprintf("%d %d %d %d %d %d \r\n",result[0],result[1],result[2],result[3],result[4],result[5]);
+        write(fd,result,6);
+        rt_kprintf("writesuccesss\r\n");
+
+}
+/**@brief Function for transfor adcvalue history.
+ *
+ */
+static void send_file_test(void *param)
+{
+        while(1){
+        result[0] = 0x01;
+        result[1] = 0x02;
+        result[2] = 0x03;
+        result[3] = 0x04;
+        result[4] = 0x05;
+        result[5] = 0x06;
+        uint16_t len = 6;
+        ble_nus_data_send(&m_nus, result,&len , m_conn_handle);
+        rt_thread_mdelay(20);
+        }
+}
+/**@brief Function for transforadcvalue ontime.
+ *
+ */
+static void timeout(void *param)
+{
+    result1 = rt_adc_read(adc_dev, 5);
+//        rt_kprintf("saadc channel 0 value = %d, ",result); 
+    result2 = rt_adc_read(adc_dev, 6);
+//       rt_kprintf("saadc channel 1 value = %d \n",result);
+    result3 = rt_adc_read(adc_dev, 7);
+//        rt_kprintf("saadc channel 5 value = %d",result);  
+	rt_kprintf("data: %d, %d, %d \n",result1,result2,result3);
+    //static int i = 0;
+    //i++;
+    //ble_bas_battery_level_update(&m_bas, i % (MAX_BATTERY_LEVEL - MIN_BATTERY_LEVEL + 1) + MIN_BATTERY_LEVEL, BLE_CONN_HANDLE_ALL);
+    //ble_hrs_heart_rate_measurement_send(&m_hrs, (rt_uint16_t)result1);
+    //ble_nus_data_send(&m_nus, &testvalue, &testlen, m_conn_handle);
+}
 /**@brief Function for handling BLE events.
  *
  * @param[in]   p_ble_evt   Bluetooth stack event.
  * @param[in]   p_context   Unused.
+ *
  */
 static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 {
@@ -317,15 +393,83 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
         for(int i = 0; i < p_evt->params.rx_data.length; i++)
         {
             rt_kprintf("%c", p_evt->params.rx_data.p_data[i]);
-            rt_ringbuffer_putchar(&ringbuffer_handler, p_evt->params.rx_data.p_data[i]);
+            //rt_ringbuffer_putchar(&ringbuffer_handler, p_evt->params.rx_data.p_data[i]);
             uart_software_intterrupt();
         }
         rt_kprintf("\r\n");
-        rt_ringbuffer_putchar(&ringbuffer_handler, '\n');
+        //rt_ringbuffer_putchar(&ringbuffer_handler, '\n');
         uart_software_intterrupt();
+        switch (p_evt->params.rx_data.p_data[0])
+        {
+        case 'A':
+            hrs_tf_on();
+            LOG_I("start transport sample...");
+            break;
+        case 'B':
+            hrs_tf_off();
+            LOG_I("stopls transport sample...");
+            break;
+        case 'C':
+            //开始采样存储数据接口
+			strcpy(time_stamp, (char *)(p_evt->params.rx_data.p_data)+1);
+			time_stamp[13] = '\0';
+			printf("start sampling, time: %s \r\n",time_stamp);
+			sprintf(file_name, "%s.hex", time_stamp); 	//将时间戳作为文件名
+            fd=  open(file_name, O_WRONLY | O_CREAT);
+            if(fd>0)
+            {
+            rt_kprintf("file creat and open successfully\r\n");
+            }
+            savedate = rt_thread_create("savedate",
+                        save_date, RT_NULL,
+                        2048,
+                        8, 20);
+            if (savedate != RT_NULL)
+                rt_thread_startup(savedate);
+            LOG_I("start sample...");
+
+            break;
+        case 'D':
+            //结束采样
+            rt_thread_delete(savedate);
+            if(fd>0)
+                close(fd);
+
+            LOG_I("stop sample...");
+            break;
+        case 'E':
+            //查询当前文件
+            LOG_I("start transport sample...");
+            break;
         
-        // ble_nus_data_send(&m_nus, (uint8_t *)p_evt->params.rx_data.p_data, &p_evt->params.rx_data.length, m_conn_handle);
+        case 'F':
+            //要求传输指定文件
+            LOG_I("start transport sample...");
+            break;
+        case 'T':
+            sendfile = savedate = rt_thread_create("sendfile",
+                        send_file_test, RT_NULL,
+                        2048,
+                        8, 20);
+            if (sendfile != RT_NULL)
+                rt_thread_startup(sendfile);
+            LOG_I("file transport test...");
+            break;
+        case 'S':
+             rt_thread_delete(sendfile);
+             LOG_I("file transport test stop");
+            break;
+        case 'R':
+            //重启设备
+            rt_hw_cpu_reset();
+            break;      
+        default:
+            break;
+        }
+        
+        //ble_nus_data_send(&m_nus, (uint8_t *)p_evt->params.rx_data.p_data, &p_evt->params.rx_data.length, m_conn_handle);
     }
+
 
 }
 
@@ -405,7 +549,7 @@ static void conn_params_init(void)
     err_code = ble_conn_params_init(&cp_init);
     APP_ERROR_CHECK(err_code);
 }
-static void ble_app_softdevice(void *param)
+static int ble_app_init(void)
 {
     ble_stack_init();
     gap_params_init();
@@ -413,9 +557,21 @@ static void ble_app_softdevice(void *param)
     services_init();
     advertising_init();
     conn_params_init();
-    rt_kprintf("Blinky example started.\r\n");
+    LOG_I("BLE started.");
     advertising_start();
+    //上面是初始化蓝牙协议栈，下面是将本地串口与蓝牙串口连接
+    rt_ringbuffer_init(&ringbuffer_handler, ringbuffer, sizeof(ringbuffer));
+    rt_ringbuffer_init(&ringbuffer_putc_handler, ringbuffer_putc, sizeof(ringbuffer_putc));
+    serial = rt_device_find(UART_NAME);
+    if (!serial)
+    {
+        rt_kprintf("find %s failed!\n", UART_NAME);
+        return -RT_ERROR;
+    }
+		
 }
+MSH_CMD_EXPORT(ble_app_init, ble app start);
+INIT_APP_EXPORT(ble_app_init);
 
 int uart_putc_hook(rt_uint8_t *ch)
 {
@@ -471,35 +627,131 @@ static void uart_task(void *param)
     }
     
 }
-
-int ble_app_uart(void)
+int hrs_tf_on(void)
 {
-    rt_ringbuffer_init(&ringbuffer_handler, ringbuffer, sizeof(ringbuffer));
-    rt_ringbuffer_init(&ringbuffer_putc_handler, ringbuffer_putc, sizeof(ringbuffer_putc));
-    serial = rt_device_find(UART_NAME);
-    if (!serial)
-    {
-        rt_kprintf("find %s failed!\n", UART_NAME);
-        return -RT_ERROR;
-    }
-    
-    static rt_thread_t tid1 = RT_NULL;
+    update = rt_timer_create("update", timeout, RT_NULL, rt_tick_from_millisecond(20), RT_TIMER_FLAG_PERIODIC | RT_TIMER_FLAG_SOFT_TIMER);
+    //启动定时器，20ms广播一次数据
+    if (update != RT_NULL)
+        rt_timer_start(update);
+    return RT_EOK;
 
-    tid1 = rt_thread_create("softdevice",
-                        ble_app_softdevice, RT_NULL,
-                        4096,
-                        22, 5);
-    if (tid1 != RT_NULL)
-        rt_thread_startup(tid1);
+}
 
-    tid1 = rt_thread_create("serial_task",
-                        uart_task, RT_NULL,
-                        1024,
-                        22, 5);
-    if (tid1 != RT_NULL)
-    {
-        rt_thread_startup(tid1);
-    }
+MSH_CMD_EXPORT(hrs_tf_on, transport realtime);
+int hrs_tf_off(void)
+{
+    rt_timer_delete(update);
     return RT_EOK;
 }
-MSH_CMD_EXPORT(ble_app_uart, ble app uart);
+MSH_CMD_EXPORT(hrs_tf_off, stop transport);
+
+int savetest(void)
+{
+
+    fd=  open("\hello.hex", O_WRONLY | O_CREAT);
+    if(fd>0)
+    {
+        rt_kprintf("file creat and open successfully\r\n");
+    }
+    int32_t timestart=rt_tick_get();
+    int count = 10000;
+    while(count)
+    {
+        count --;
+        result1 = rt_adc_read(adc_dev, 5);
+        result2 = rt_adc_read(adc_dev, 6);
+        result3 = rt_adc_read(adc_dev, 7);
+        //rt_kprintf("%d %d %d \r\n",result1,result2,result3);
+        result[0] = (result1>>8)&0xff;
+        result[1] =  result1&0xff;
+        result[2] = (result2>>8)&0xff;
+        result[3] =  result2&0xff;
+        result[4] = (result3>>8)&0xff;
+        result[5] =  result3&0xff;
+        //rt_kprintf("%d %d %d %d %d %d \r\n",result[0],result[1],result[2],result[3],result[4],result[5]);
+        write(fd,result,6);
+        rt_thread_mdelay(20);
+        
+
+    }
+    int32_t timestop=rt_tick_get();
+    close(fd);
+    rt_kprintf("usetime = %d\r\n",timestop-timestart);
+
+}
+MSH_CMD_EXPORT(savetest, test adc save to file);
+int readtest()
+{   int size;
+    char buffer[40];
+    fd=  open("\hello.hex", O_RDONLY);
+    size = read(fd, buffer, sizeof(buffer));
+    for(int i=0;i<=30;i++)
+    {
+        rt_kprintf("%d ",buffer[i]);
+    }
+    rt_kprintf(" \r\nsize=%d",size);
+}
+MSH_CMD_EXPORT(readtest, test adc read to file);
+int stop_save(void)
+{
+
+}
+MSH_CMD_EXPORT(stop_save, stop_save save adcvalue);
+
+int ble_uart_send(int argc, char **argv)
+{
+    char buffer[256];
+    uint16_t length; 
+    char text[15] = "ble uart test\n";
+
+    if(argc==1)
+    {
+        length = rt_strlen(text);
+        ble_nus_data_send(&m_nus, text, &length, m_conn_handle);
+    }
+
+
+    if(argc==2)
+    {
+        length = rt_strlen(argv[1]);
+        rt_strncpy(buffer, argv[1], length);
+        ble_nus_data_send(&m_nus, buffer, &length, m_conn_handle);
+    }
+
+
+
+    return 0;
+}
+MSH_CMD_EXPORT(ble_uart_send, ble uart test)
+
+// int ble_app_uart(void)
+// {
+//     rt_ringbuffer_init(&ringbuffer_handler, ringbuffer, sizeof(ringbuffer));
+//     rt_ringbuffer_init(&ringbuffer_putc_handler, ringbuffer_putc, sizeof(ringbuffer_putc));
+//     serial = rt_device_find(UART_NAME);
+//     if (!serial)
+//     {
+//         rt_kprintf("find %s failed!\n", UART_NAME);
+//         return -RT_ERROR;
+//     }
+    
+//     static rt_thread_t tid1 = RT_NULL;
+
+//     tid1 = rt_thread_create("softdevice",
+//                         ble_app_softdevice, RT_NULL,
+//                         4096,
+//                         22, 5);
+//     if (tid1 != RT_NULL)
+//         rt_thread_startup(tid1);
+
+//     tid1 = rt_thread_create("serial_task",
+//                         uart_task, RT_NULL,
+//                         1024,
+//                         22, 5);
+//     if (tid1 != RT_NULL)
+//     {
+//         rt_thread_startup(tid1);
+//     }
+//     return RT_EOK;
+// }
+// MSH_CMD_EXPORT(ble_app_uart, ble app uart);
