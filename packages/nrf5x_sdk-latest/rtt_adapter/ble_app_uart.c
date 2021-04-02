@@ -126,6 +126,13 @@ static void save_date(void *param)
 /**@brief Function for transfor adcvalue history.
  *
  */
+static void rsdate(void *param)
+{
+        char *buffer;
+        read(fd,buffer,6)
+        uint16_t len = 6;
+        ble_nus_data_send(&m_nus, buffer,&len , m_conn_handle);
+}
 static void send_file_test(void *param)
 {
         while(1){
@@ -140,6 +147,19 @@ static void send_file_test(void *param)
         rt_thread_mdelay(20);
         }
 }
+static void read_fname(void *param)
+{
+    DIR *dirp;
+    struct dirent *dp;
+    /* 打开根目录 */
+    rt_kprintf("the directory is:\n");
+    dirp = opendir("/");
+    for (dp = readdir(dirp); dp != RT_NULL; dp = readdir(dirp))
+    {          
+        rt_kprintf("%s\n", dp->d_name);
+    }
+}
+MSH_CMD_EXPORT(read_fname, readfilename)
 /**@brief Function for transforadcvalue ontime.
  *
  */
@@ -151,12 +171,15 @@ static void timeout(void *param)
 //       rt_kprintf("saadc channel 1 value = %d \n",result);
     result3 = rt_adc_read(adc_dev, 7);
 //        rt_kprintf("saadc channel 5 value = %d",result);  
+    result[0] = (result1>>8)&0xff;
+    result[1] =  result1&0xff;
+    result[2] = (result2>>8)&0xff;
+    result[3] =  result2&0xff;
+    result[4] = (result3>>8)&0xff;
+    result[5] =  result3&0xff;
 	rt_kprintf("data: %d, %d, %d \n",result1,result2,result3);
-    //static int i = 0;
-    //i++;
-    //ble_bas_battery_level_update(&m_bas, i % (MAX_BATTERY_LEVEL - MIN_BATTERY_LEVEL + 1) + MIN_BATTERY_LEVEL, BLE_CONN_HANDLE_ALL);
-    //ble_hrs_heart_rate_measurement_send(&m_hrs, (rt_uint16_t)result1);
-    //ble_nus_data_send(&m_nus, &testvalue, &testlen, m_conn_handle);
+    uint16_t len = 6;
+    ble_nus_data_send(&m_nus, result,&len , m_conn_handle);
 }
 /**@brief Function for handling BLE events.
  *
