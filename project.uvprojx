@@ -337,7 +337,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--reduce_paths</MiscControls>
-              <Define>DEBUG NRF52840_XXAA, SOFTDEVICE_PRESENT, __CLK_TCK=RT_TICK_PER_SECOND, __RTTHREAD__, CONFIG_GPIO_AS_PINRESET, USE_APP_CONFIG, RT_USING_ARM_LIBC</Define>
+              <Define>DEBUG  NRF52840_XXAA, SOFTDEVICE_PRESENT, __CLK_TCK=RT_TICK_PER_SECOND, __RTTHREAD__, CONFIG_GPIO_AS_PINRESET, USE_APP_CONFIG, RT_USING_ARM_LIBC</Define>
               <Undefine></Undefine>
               <IncludePath>applications;.;libraries\cmsis\include;rt-thread\libcpu\arm\common;rt-thread\libcpu\arm\cortex-m4;packages\crclib-v1.00\inc;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\spi;rt-thread\components\drivers\include;rt-thread\components\drivers\spi\sfud\inc;rt-thread\components\drivers\include;board;libraries\drivers;packages\fastlz-v1.0.1;rt-thread\components\dfs\include;rt-thread\components\dfs\filesystems\devfs;rt-thread\components\dfs\filesystems\elmfat;rt-thread\components\finsh;.;rt-thread\include;rt-thread\components\libc\compilers\armlibc;rt-thread\components\libc\compilers\common;packages\nrfx-v2.1.0;packages\nrfx-v2.1.0\drivers;packages\nrfx-v2.1.0\drivers\include;packages\nrfx-v2.1.0\mdk;packages\nrfx-v2.1.0\hal;packages\nrf5x_sdk-latest\components\libraries\util;packages\nrf5x_sdk-latest\components\libraries\experimental_section_vars;packages\nrf5x_sdk-latest\components\libraries\log;packages\nrf5x_sdk-latest\components\libraries\log\src;packages\nrf5x_sdk-latest\components\libraries\strerror;packages\nrf5x_sdk-latest\components\libraries\memobj;packages\nrf5x_sdk-latest\components\libraries\balloc;packages\nrf5x_sdk-latest\components\libraries\atomic;packages\nrf5x_sdk-latest\components\libraries\atomic_flags;packages\nrf5x_sdk-latest\components\libraries\sensorsim;packages\nrf5x_sdk-latest\components\ble\ble_link_ctx_manager;packages\nrf5x_sdk-latest\components\ble\common;packages\nrf5x_sdk-latest\components\ble\ble_advertising;packages\nrf5x_sdk-latest\components\ble\nrf_ble_gatt;packages\nrf5x_sdk-latest\components\ble\nrf_ble_qwr;packages\nrf5x_sdk-latest\components\ble\ble_services\ble_lbs;packages\nrf5x_sdk-latest\components\softdevice\common;packages\nrf5x_sdk-latest\components\softdevice\s140\headers;packages\nrf5x_sdk-latest\components\softdevice\s140\headers\nrf52;packages\nrf5x_sdk-latest\integration\nrfx\legacy;packages\nrf5x_sdk-latest\components\ble\ble_services\ble_nus</IncludePath>
             </VariousControls>
@@ -1145,7 +1145,7 @@
       <TargetName>softdevice</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>

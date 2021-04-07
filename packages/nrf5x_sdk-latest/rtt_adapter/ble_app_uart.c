@@ -129,7 +129,7 @@ static void save_date(void *param)
 static void rsdate(void *param)
 {
         char *buffer;
-        read(fd,buffer,6)
+        read(fd,buffer,6);
         uint16_t len = 6;
         ble_nus_data_send(&m_nus, buffer,&len , m_conn_handle);
 }
@@ -179,7 +179,7 @@ static void timeout(void *param)
     result[5] =  result3&0xff;
 	rt_kprintf("data: %d, %d, %d \n",result1,result2,result3);
     uint16_t len = 6;
-    ble_nus_data_send(&m_nus, result,&len , m_conn_handle);
+    //·ble_nus_data_send(&m_nus, result,&len , m_conn_handle);
 }
 /**@brief Function for handling BLE events.
  *
