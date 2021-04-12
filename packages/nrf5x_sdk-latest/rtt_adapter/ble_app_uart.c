@@ -100,7 +100,9 @@ static struct rt_ringbuffer ringbuffer_putc_handler;
 static rt_uint8_t ringbuffer_putc[1024] = {0};
 static rt_thread_t savedate = NULL;
 static rt_thread_t sendfile = NULL;
-static rt_timer_t update;
+static rt_thread_t senddata = NULL;
+
+
 
 /**@brief Function for saveadcvalue.
  *
@@ -163,7 +165,7 @@ MSH_CMD_EXPORT(read_fname, readfilename)
 /**@brief Function for transforadcvalue ontime.
  *
  */
-static void timeout(void *param)
+static void send_data_ol(void *param)
 {
     result1 = rt_adc_read(adc_dev, 5);
 //        rt_kprintf("saadc channel 0 value = %d, ",result); 
@@ -652,10 +654,12 @@ static void uart_task(void *param)
 }
 int hrs_tf_on(void)
 {
-    update = rt_timer_create("update", timeout, RT_NULL, rt_tick_from_millisecond(20), RT_TIMER_FLAG_PERIODIC | RT_TIMER_FLAG_SOFT_TIMER);
-    //启动定时器，20ms广播一次数据
-    if (update != RT_NULL)
-        rt_timer_start(update);
+    senddata = rt_thread_create("senddate",
+                        send_data_ol, RT_NULL,
+                        2048,
+                        8, 20);
+    if (senddata != RT_NULL)
+                rt_thread_startup(senddata);
     return RT_EOK;
 
 }
@@ -663,7 +667,7 @@ int hrs_tf_on(void)
 MSH_CMD_EXPORT(hrs_tf_on, transport realtime);
 int hrs_tf_off(void)
 {
-    rt_timer_delete(update);
+    rt_thread_delete(senddata);
     return RT_EOK;
 }
 MSH_CMD_EXPORT(hrs_tf_off, stop transport);

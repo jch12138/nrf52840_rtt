@@ -28,378 +28,429 @@ Project File Date:  04/07/2021
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Program Files (x86)\Keil_v5\ARM\ARMCC\Bin'
 Build target 'softdevice'
 compiling sample.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+applications\sample.c(1): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include "rtthread.h"
 applications\sample.c: 0 warnings, 1 error
-compiling backtrace.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-rt-thread\libcpu\arm\common\backtrace.c: 0 warnings, 1 error
-compiling div0.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-rt-thread\libcpu\arm\common\div0.c: 0 warnings, 1 error
-compiling crc8.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\crclib-v1.00\src\crc8.c: 0 warnings, 1 error
 compiling showmem.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\libcpu\arm\common\showmem.c(11): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\libcpu\arm\common\showmem.c: 0 warnings, 1 error
+compiling div0.c...
 compiling cpuport.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\libcpu\arm\cortex-m4\cpuport.c(20): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\libcpu\arm\cortex-m4\cpuport.c: 0 warnings, 1 error
+compiling backtrace.c...
+rt-thread\libcpu\arm\common\backtrace.c(11): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
+rt-thread\libcpu\arm\common\backtrace.c: 0 warnings, 1 error
+compiling crc8.c...
+packages\crclib-v1.00\src\crc8.c(9): error:  #5: cannot open source input file "crc8.h": No such file or directory
+  #include "crc8.h"
+packages\crclib-v1.00\src\crc8.c: 0 warnings, 1 error
 compiling application.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+applications\application.c(12): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 applications\application.c: 0 warnings, 1 error
 compiling crc16.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\crclib-v1.00\src\crc16.c(9): error:  #5: cannot open source input file "crc16.h": No such file or directory
+  #include "crc16.h"
 packages\crclib-v1.00\src\crc16.c: 0 warnings, 1 error
 compiling crc32.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\crclib-v1.00\src\crc32.c(9): error:  #5: cannot open source input file "crc32.h": No such file or directory
+  #include "crc32.h"
 packages\crclib-v1.00\src\crc32.c: 0 warnings, 1 error
 compiling adc.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\misc\adc.c(12): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\drivers\misc\adc.c: 0 warnings, 1 error
 compiling pin.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\misc\pin.c(12): error:  #5: cannot open source input file "drivers/pin.h": No such file or directory
+  #include <drivers/pin.h>
 rt-thread\components\drivers\misc\pin.c: 0 warnings, 1 error
 compiling serial.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\serial\serial.c(30): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\components\drivers\serial\serial.c: 0 warnings, 1 error
-compiling sfud.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-rt-thread\components\drivers\spi\sfud\src\sfud.c: 0 warnings, 1 error
 compiling spi_msd.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\spi\spi_msd.h(15): error:  #5: cannot open source input file "drivers/spi.h": No such file or directory
+  #include <drivers/spi.h>
 rt-thread\components\drivers\spi\spi_msd.c: 0 warnings, 1 error
+compiling sfud.c...
+rt-thread\components\drivers\spi\sfud\src\../inc/sfud_def.h(36): error:  #5: cannot open source input file "sfud_cfg.h": No such file or directory
+  #include <sfud_cfg.h>
+rt-thread\components\drivers\spi\sfud\src\sfud.c: 0 warnings, 1 error
 compiling spi_core.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\spi\spi_core.c(16): error:  #5: cannot open source input file "drivers/spi.h": No such file or directory
+  #include <drivers/spi.h>
 rt-thread\components\drivers\spi\spi_core.c: 0 warnings, 1 error
 compiling sfud_sfdp.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\spi\sfud\src\../inc/sfud_def.h(36): error:  #5: cannot open source input file "sfud_cfg.h": No such file or directory
+  #include <sfud_cfg.h>
 rt-thread\components\drivers\spi\sfud\src\sfud_sfdp.c: 0 warnings, 1 error
 compiling spi_dev.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\spi\spi_dev.c(10): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\drivers\spi\spi_dev.c: 0 warnings, 1 error
 compiling spi_flash_sfud.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\spi\spi_flash_sfud.c(12): error:  #5: cannot open source input file "rtdevice.h": No such file or directory
+  #include <rtdevice.h>
 rt-thread\components\drivers\spi\spi_flash_sfud.c: 0 warnings, 1 error
 compiling workqueue.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\src\workqueue.c(11): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\components\drivers\src\workqueue.c: 0 warnings, 1 error
 compiling dataqueue.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\src\dataqueue.c(12): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\drivers\src\dataqueue.c: 0 warnings, 1 error
 compiling completion.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\src\completion.c(11): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\components\drivers\src\completion.c: 0 warnings, 1 error
 compiling ringbuffer.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\src\ringbuffer.c(13): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\drivers\src\ringbuffer.c: 0 warnings, 1 error
 compiling pipe.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\src\pipe.c(11): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\components\drivers\src\pipe.c: 0 warnings, 1 error
 compiling ringblk_buf.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\src\ringblk_buf.c(11): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\components\drivers\src\ringblk_buf.c: 0 warnings, 1 error
 compiling waitqueue.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\drivers\src\waitqueue.c(14): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\components\drivers\src\waitqueue.c: 0 warnings, 1 error
 compiling w25q16.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+board\w25q16.c(1): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include "rtthread.h"
 board\w25q16.c: 0 warnings, 1 error
 compiling board.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+board\board.c(11): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 board\board.c: 0 warnings, 1 error
 compiling drv_gpio.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+libraries\drivers\drv_gpio.h(14): error:  #5: cannot open source input file "board.h": No such file or directory
+  #include <board.h>
 libraries\drivers\drv_gpio.c: 0 warnings, 1 error
 compiling drv_adc.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+libraries\drivers\drv_adc.h(14): error:  #5: cannot open source input file "board.h": No such file or directory
+  #include <board.h>
 libraries\drivers\drv_adc.c: 0 warnings, 1 error
 compiling drv_uart.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+libraries\drivers\drv_uart.c(11): error:  #5: cannot open source input file "rtdevice.h": No such file or directory
+  #include <rtdevice.h>
 libraries\drivers\drv_uart.c: 0 warnings, 1 error
 compiling drv_spi.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+libraries\drivers\drv_spi.c(14): error:  #5: cannot open source input file "board.h": No such file or directory
+  #include "board.h"
 libraries\drivers\drv_spi.c: 0 warnings, 1 error
 compiling fastlz_sample.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\fastlz-v1.0.1\fastlz_sample.c(34): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 packages\fastlz-v1.0.1\fastlz_sample.c: 0 warnings, 1 error
 compiling fastlz.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\fastlz-v1.0.1\fastlz.c(29): error:  #5: cannot open source input file "rtconfig.h": No such file or directory
+  #include <rtconfig.h>
 packages\fastlz-v1.0.1\fastlz.c: 0 warnings, 1 error
 compiling dfs_posix.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\dfs\src\dfs_posix.c(12): error:  #5: cannot open source input file "dfs.h": No such file or directory
+  #include <dfs.h>
 rt-thread\components\dfs\src\dfs_posix.c: 0 warnings, 1 error
 compiling dfs_file.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\dfs\src\dfs_file.c(14): error:  #5: cannot open source input file "dfs.h": No such file or directory
+  #include <dfs.h>
 rt-thread\components\dfs\src\dfs_file.c: 0 warnings, 1 error
 compiling select.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\dfs\src\select.c(10): error:  #5: cannot open source input file "dfs.h": No such file or directory
+  #include <dfs.h>
 rt-thread\components\dfs\src\select.c: 0 warnings, 1 error
 compiling dfs.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\dfs\src\dfs.c(13): error:  #5: cannot open source input file "dfs.h": No such file or directory
+  #include <dfs.h>
 rt-thread\components\dfs\src\dfs.c: 0 warnings, 1 error
 compiling poll.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\dfs\src\poll.c(13): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\components\dfs\src\poll.c: 0 warnings, 1 error
 compiling dfs_fs.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\dfs\src\dfs_fs.c(15): error:  #5: cannot open source input file "dfs_fs.h": No such file or directory
+  #include <dfs_fs.h>
 rt-thread\components\dfs\src\dfs_fs.c: 0 warnings, 1 error
-compiling ffunicode.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-rt-thread\components\dfs\filesystems\elmfat\ffunicode.c: 0 warnings, 1 error
 compiling devfs.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\dfs\filesystems\devfs\devfs.c(11): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\dfs\filesystems\devfs\devfs.c: 0 warnings, 1 error
+compiling ffunicode.c...
+rt-thread\components\dfs\filesystems\elmfat\ff.h(29): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
+rt-thread\components\dfs\filesystems\elmfat\ffunicode.c: 0 warnings, 1 error
 compiling dfs_elm.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\dfs\filesystems\elmfat\dfs_elm.c(20): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\dfs\filesystems\elmfat\dfs_elm.c: 0 warnings, 1 error
 compiling ff.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\dfs\filesystems\elmfat\ff.h(29): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\dfs\filesystems\elmfat\ff.c: 0 warnings, 1 error
 compiling shell.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\finsh\shell.c(21): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\components\finsh\shell.c: 0 warnings, 1 error
 compiling msh.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\finsh\msh.c(12): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\finsh\msh.c: 0 warnings, 1 error
 compiling cmd.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\finsh\cmd.c(35): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\components\finsh\cmd.c: 0 warnings, 1 error
 compiling msh_file.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\finsh\msh_file.c(11): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\finsh\msh_file.c: 0 warnings, 1 error
 compiling device.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\device.c(17): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\src\device.c: 0 warnings, 1 error
 compiling scheduler.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\scheduler.c(33): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\src\scheduler.c: 0 warnings, 1 error
 compiling timer.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\timer.c(21): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\src\timer.c: 0 warnings, 1 error
 compiling idle.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\idle.c(20): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\src\idle.c: 0 warnings, 1 error
 compiling components.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\components.c(20): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\src\components.c: 0 warnings, 1 error
 compiling mem.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\mem.c(50): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\src\mem.c: 0 warnings, 1 error
 compiling clock.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\clock.c(19): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\src\clock.c: 0 warnings, 1 error
 compiling irq.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\irq.c(14): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\src\irq.c: 0 warnings, 1 error
 compiling ipc.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\ipc.c(44): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\src\ipc.c: 0 warnings, 1 error
 compiling mempool.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\mempool.c(19): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\src\mempool.c: 0 warnings, 1 error
 compiling kservice.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\kservice.c(22): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\src\kservice.c: 0 warnings, 1 error
 compiling thread.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\thread.c(32): error:  #5: cannot open source input file "rthw.h": No such file or directory
+  #include <rthw.h>
 rt-thread\src\thread.c: 0 warnings, 1 error
 compiling object.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\src\object.c(18): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\src\object.c: 0 warnings, 1 error
 compiling stdio.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\libc\compilers\armlibc\stdio.c(15): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\libc\compilers\armlibc\stdio.c: 0 warnings, 1 error
 compiling syscalls.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\libc\compilers\armlibc\syscalls.c(21): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\libc\compilers\armlibc\syscalls.c: 0 warnings, 1 error
 compiling libc.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\libc\compilers\armlibc\libc.c(13): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\libc\compilers\armlibc\libc.c: 0 warnings, 1 error
 compiling mem_std.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\libc\compilers\armlibc\mem_std.c(10): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include "rtthread.h"
 rt-thread\components\libc\compilers\armlibc\mem_std.c: 0 warnings, 1 error
 compiling stdlib.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\libc\compilers\common\stdlib.c(11): error:  #5: cannot open source input file "rtthread.h": No such file or directory
+  #include <rtthread.h>
 rt-thread\components\libc\compilers\common\stdlib.c: 0 warnings, 1 error
 compiling unistd.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\libc\compilers\common\unistd.c(12): error:  #5: cannot open source input file "unistd.h": No such file or directory
+  #include <unistd.h>
 rt-thread\components\libc\compilers\common\unistd.c: 0 warnings, 1 error
 compiling time.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+rt-thread\components\libc\compilers\common\time.c(21): error:  #5: cannot open source input file "sys/time.h": No such file or directory
+  #include <sys/time.h>
 rt-thread\components\libc\compilers\common\time.c: 0 warnings, 1 error
 compiling nrfx_usbd.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_usbd.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_usbd.c: 0 warnings, 1 error
 compiling nrfx_nvmc.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_nvmc.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_nvmc.c: 0 warnings, 1 error
 compiling nrfx_qspi.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_qspi.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_qspi.c: 0 warnings, 1 error
 compiling nrfx_twi.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_twi.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_twi.c: 0 warnings, 1 error
 compiling nrfx_systick.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_systick.c(31): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_systick.c: 0 warnings, 1 error
-compiling nrfx_twi_twim.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrfx-v2.1.0\drivers\src\nrfx_twi_twim.c: 0 warnings, 1 error
 compiling nrfx_dppi.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_dppi.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_dppi.c: 0 warnings, 1 error
+compiling nrfx_twi_twim.c...
+packages\nrfx-v2.1.0\drivers\src\nrfx_twi_twim.c(32): error:  #5: cannot open source input file "nrfx_twi_twim.h": No such file or directory
+  #include <nrfx_twi_twim.h>
+packages\nrfx-v2.1.0\drivers\src\nrfx_twi_twim.c: 0 warnings, 1 error
 compiling nrfx_gpiote.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_gpiote.c(31): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_gpiote.c: 0 warnings, 1 error
 compiling nrfx_spis.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_spis.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_spis.c: 0 warnings, 1 error
 compiling nrfx_i2s.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_i2s.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_i2s.c: 0 warnings, 1 error
 compiling nrfx_twim.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_twim.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_twim.c: 0 warnings, 1 error
 compiling nrfx_timer.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_timer.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_timer.c: 0 warnings, 1 error
 compiling nrfx_power.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_power.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_power.c: 0 warnings, 1 error
 compiling nrfx_uarte.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_uarte.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_uarte.c: 0 warnings, 1 error
 compiling nrfx_egu.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_egu.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_egu.c: 0 warnings, 1 error
 compiling nrfx_temp.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_temp.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_temp.c: 0 warnings, 1 error
 compiling nrfx_lpcomp.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_lpcomp.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_lpcomp.c: 0 warnings, 1 error
 compiling nrfx_usbreg.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_usbreg.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_usbreg.c: 0 warnings, 1 error
 compiling nrfx_saadc.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_saadc.c(31): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_saadc.c: 0 warnings, 1 error
 compiling nrfx_pdm.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_pdm.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_pdm.c: 0 warnings, 1 error
 compiling nrfx_rng.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_rng.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_rng.c: 0 warnings, 1 error
 compiling nrfx_uart.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_uart.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_uart.c: 0 warnings, 1 error
 compiling nrfx_twis.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_twis.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_twis.c: 0 warnings, 1 error
 compiling system_nrf52840.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\mdk\nrf52840.h(147): error:  #5: cannot open source input file "core_cm4.h": No such file or directory
+  #include "core_cm4.h"                           /*!< ARM Cortex-M4 processor and core peripherals                              */
 packages\nrfx-v2.1.0\mdk\system_nrf52840.c: 0 warnings, 1 error
 compiling nrfx_pwm.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_pwm.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_pwm.c: 0 warnings, 1 error
 compiling nrfx_ppi.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_ppi.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_ppi.c: 0 warnings, 1 error
 compiling nrfx_wdt.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_wdt.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_wdt.c: 0 warnings, 1 error
 compiling nrfx_comp.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_comp.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_comp.c: 0 warnings, 1 error
 compiling nrfx_nfct.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_nfct.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_nfct.c: 0 warnings, 1 error
 compiling nrfx_spi.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_spi.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_spi.c: 0 warnings, 1 error
 compiling nrfx_clock.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_clock.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_clock.c: 0 warnings, 1 error
 compiling nrfx_rtc.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_rtc.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_rtc.c: 0 warnings, 1 error
 compiling nrfx_adc.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_adc.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_adc.c: 0 warnings, 1 error
 compiling nrfx_ipc.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_ipc.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_ipc.c: 0 warnings, 1 error
 compiling nrfx_spim.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_spim.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_spim.c: 0 warnings, 1 error
 compiling nrfx_qdec.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrfx-v2.1.0\drivers\src\nrfx_qdec.c(32): error:  #5: cannot open source input file "nrfx.h": No such file or directory
+  #include <nrfx.h>
 packages\nrfx-v2.1.0\drivers\src\nrfx_qdec.c: 0 warnings, 1 error
 compiling app_error_weak.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+D:\Program Files (x86)\Keil_v5\Arm\Packs\NordicSemiconductor\nRF_DeviceFamilyPack\8.35.0\Device\Include\nrf52840.h(147): error:  #5: cannot open source input file "core_cm4.h": No such file or directory
+  #include "core_cm4.h"                           /*!< ARM Cortex-M4 processor and core peripherals                              */
 packages\nrf5x_sdk-latest\components\libraries\util\app_error_weak.c: 0 warnings, 1 error
 compiling nrf_ble_gatt.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
+packages\nrf5x_sdk-latest\components\ble\nrf_ble_gatt\nrf_ble_gatt.c(41): error:  #5: cannot open source input file "sdk_common.h": No such file or directory
+  #include "sdk_common.h"
 packages\nrf5x_sdk-latest\components\ble\nrf_ble_gatt\nrf_ble_gatt.c: 0 warnings, 1 error
 compiling ble_srv_common.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\ble\common\ble_srv_common.c: 0 warnings, 1 error
 compiling nrf_strerror.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\libraries\strerror\nrf_strerror.c: 0 warnings, 1 error
 compiling ble_advertising.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\ble\ble_advertising\ble_advertising.c: 0 warnings, 1 error
 compiling app_util_platform.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\libraries\util\app_util_platform.c: 0 warnings, 1 error
 compiling sensorsim.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\libraries\sensorsim\sensorsim.c: 0 warnings, 1 error
 compiling nrf_atflags.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\libraries\atomic_flags\nrf_atflags.c: 0 warnings, 1 error
 compiling ble_link_ctx_manager.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.c: 0 warnings, 1 error
-compiling ble_advdata.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\ble\common\ble_advdata.c: 0 warnings, 1 error
-compiling nrf_sdh.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\softdevice\common\nrf_sdh.c: 0 warnings, 1 error
-compiling nrf_section_iter.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\libraries\experimental_section_vars\nrf_section_iter.c: 0 warnings, 1 error
-compiling ble_conn_params_rtt.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\rtt_adapter\ble_conn_params_rtt.c: 0 warnings, 1 error
-compiling nrf_sdh_ble_rtt.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\rtt_adapter\nrf_sdh_ble_rtt.c: 0 warnings, 1 error
-compiling nrf_ble_qwr.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\ble\nrf_ble_qwr\nrf_ble_qwr.c: 0 warnings, 1 error
-compiling app_error.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\libraries\util\app_error.c: 0 warnings, 1 error
-compiling ble_nus.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\ble\ble_services\ble_nus\ble_nus.c: 0 warnings, 1 error
-compiling ble_app_uart.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\rtt_adapter\ble_app_uart.c: 0 warnings, 1 error
-compiling ble_conn_state.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\ble\common\ble_conn_state.c: 0 warnings, 1 error
-compiling nrf_drv_clock.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\integration\nrfx\legacy\nrf_drv_clock.c: 0 warnings, 1 error
-compiling nrf_atomic.c...
-"no source": Error: command-line:  #992: invalid macro definition: DEBUG.
-packages\nrf5x_sdk-latest\components\libraries\atomic\nrf_atomic.c: 0 warnings, 1 error
-".\packages\nrf5x_sdk-latest\components\softdevice\s140\hex\s140_nrf52_7.0.1_softdevice.hex" - 124 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -412,7 +463,7 @@ Package Vendor: NordicSemiconductor
   D:\Program Files (x86)\Keil_v5\Arm\Packs\NordicSemiconductor\nRF_DeviceFamilyPack\8.35.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Target not created.
+Project build/rebuild aborted.
 Build Time Elapsed:  00:00:04
 </pre>
 </body>
