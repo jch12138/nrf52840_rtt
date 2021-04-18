@@ -38,11 +38,15 @@
 
 
 #include <dfs_posix.h>
+#include "math.h"
+#include <stdio.h>
+
+#define PI 3.14159
 
 
 #define APP_BLE_CONN_CFG_TAG            1                                           /**< A tag identifying the SoftDevice BLE configuration. */
 
-#define DEVICE_NAME                     "Pluse"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                     "Pluse_WJH"                               /**< Name of device. Will be included in the advertising data. */
 #define NUS_SERVICE_UUID_TYPE           BLE_UUID_TYPE_VENDOR_BEGIN                  /**< UUID type for the Nordic UART Service (vendor specific). */
 
 #define APP_BLE_OBSERVER_PRIO           3                                           /**< Application's BLE observer priority. You shouldn't need to modify this value. */
@@ -102,13 +106,108 @@ static rt_thread_t savedate = NULL;
 static rt_thread_t sendfile = NULL;
 static rt_thread_t senddata = NULL;
 
+/*
+实现蓝牙串口的打印
+*/
+ret_code_t ble_printf(const char *fmt, ...)
+{
+    ret_code_t ret = NRF_SUCCESS;
+    va_list args;
+    rt_uint16_t length;
+    static char rt_log_buf[255];
 
+    va_start(args, fmt);
+
+    length = rt_vsnprintf(rt_log_buf, sizeof(rt_log_buf) - 1, fmt, args);
+
+    ret = ble_nus_data_send(&m_nus, rt_log_buf, &length, m_conn_handle);
+
+    va_end(args);
+
+    return ret;
+}
+
+//文件传输测试
+
+int ble_file_transfer_test(int argc, char **argv)
+{
+    ret_code_t err_code;
+
+    int ret;
+    int fd;            /* 文件指针 */
+    struct stat buf;   /* 文件状态 */
+    char filename[20]; /* 文件名 */
+    uint16_t data_size,send_size;
+    uint8_t buffer[256]; /* 发送缓存 */
+
+    if (argc == 1)
+    {
+        rt_strncpy(filename, "/file.txt", 9);
+        filename[9] = '\0';
+    }
+    if (argc == 2)
+    {
+        rt_strncpy(filename, argv[1], rt_strlen(argv[1]));
+        filename[rt_strlen(argv[1])] = '\0';
+    }
+
+    ret = stat(filename, &buf);
+    if (ret == 0)
+    {
+        rt_kprintf("%s file size = %d\n", filename, buf.st_size);
+    }
+    else
+    {
+        rt_kprintf("%s not found\n", filename);
+        return 0;
+    }
+
+    ble_printf("filesize:%dbytes\r\n", buf.st_size);
+
+    fd = open(filename, O_RDONLY);
+
+    if (fd >= 0)
+    {
+        while (true)
+        {
+            data_size = read(fd, buffer, m_ble_nus_max_data_len);
+            if(data_size == 0)
+            {
+                break;
+            }
+
+            for (int i = 0; i < data_size; i++)
+            {
+                rt_kprintf("%x ", buffer[i]);
+            }
+
+            rt_kprintf("\r\n");
+
+//            buffer[data_size] = '\r';
+//            buffer[data_size + 1] = '\n';
+
+//            send_size = data_size +2;
+           
+            do
+            {
+                err_code = ble_nus_data_send(&m_nus, buffer, &data_size, m_conn_handle);
+            } while (err_code != NRF_SUCCESS);
+
+            
+        }
+
+        close(fd);
+    }
+
+    ble_printf("file transfer end\r\n");
+}
+MSH_CMD_EXPORT(ble_file_transfer_test, ble send file test);
 
 /**@brief Function for saveadcvalue.
  *
 
  */
-static void save_date(void *param)
+static void save_adcdate(void *param)
 {
         result1 = rt_adc_read(adc_dev, 5);
         result2 = rt_adc_read(adc_dev, 6);
@@ -125,30 +224,72 @@ static void save_date(void *param)
         rt_kprintf("writesuccesss\r\n");
 
 }
+
+static void adc_data()
+{
+    int virtual_value[3];
+    float t=0;
+
+    uint8_t buf[30];
+    uint16_t m=0;
+    uint16_t length = 30;
+    
+    while (1)
+    {
+//         result1 = rt_adc_read(adc_dev, 5);
+//         result2 = rt_adc_read(adc_dev, 6);
+//         result3 = rt_adc_read(adc_dev, 7);
+//         virtual_value[0] = (int)(sin(2*PI*t/10)*1000);
+//         virtual_value[1] = (int)(sin(2*PI*t/10+PI/4)*1000);
+//         virtual_value[2] = (int)(sin(2*PI*t/10+PI/2)*1000);
+//         ble_printf("data:%d,%d,%d\r\n",virtual_value[0],virtual_value[1],virtual_value[2]);
+//         rt_kprintf("data:%d,%d,%d\r\n",virtual_value[0],virtual_value[1],virtual_value[2]);
+//         t++;
+//        
+//         rt_thread_mdelay(20);
+
+
+        for(int i=0;i<5;i++)
+        {
+            buf[6*i] = m>>8;
+            buf[6*i+1] = m&0xff;
+            buf[6*i+2] = m>>8;
+            buf[6*i+3] = m&0xff;
+            buf[6*i+4] = m>>8;
+            buf[6*i+5] = m&0xff;
+//            m++;
+						t=t+0.5;
+					  m = (int)(sin(t)*500);
+						rt_kprintf("data: %d\r\n",m);
+        }
+//        if(m>500)
+//        {
+//            m=0;
+//        }
+        ble_nus_data_send(&m_nus, buf, &length, m_conn_handle);
+        
+        rt_thread_mdelay(500);
+    }
+
+}
+
+int adc_data_thread(void)
+{
+    senddata = rt_thread_create("senddate",
+                        adc_data, RT_NULL,
+                        2048,
+                        8, 20);
+    if (senddata != RT_NULL)
+                rt_thread_startup(senddata);
+    return RT_EOK;
+
+}
+//INIT_APP_EXPORT(adc_data_thread);
+MSH_CMD_EXPORT(adc_data_thread, send_data);
 /**@brief Function for transfor adcvalue history.
  *
  */
-static void rsdate(void *param)
-{
-        char *buffer;
-        read(fd,buffer,6);
-        uint16_t len = 6;
-        ble_nus_data_send(&m_nus, buffer,&len , m_conn_handle);
-}
-static void send_file_test(void *param)
-{
-        while(1){
-        result[0] = 0x01;
-        result[1] = 0x02;
-        result[2] = 0x03;
-        result[3] = 0x04;
-        result[4] = 0x05;
-        result[5] = 0x06;
-        uint16_t len = 6;
-        ble_nus_data_send(&m_nus, result,&len , m_conn_handle);
-        rt_thread_mdelay(20);
-        }
-}
+
 static void read_fname(void *param)
 {
     DIR *dirp;
@@ -165,7 +306,7 @@ MSH_CMD_EXPORT(read_fname, readfilename)
 /**@brief Function for transforadcvalue ontime.
  *
  */
-static void send_data_ol(void *param)
+static void send_adcdata_ol(void *param)
 {
     result1 = rt_adc_read(adc_dev, 5);
 //        rt_kprintf("saadc channel 0 value = %d, ",result); 
@@ -179,7 +320,7 @@ static void send_data_ol(void *param)
     result[3] =  result2&0xff;
     result[4] = (result3>>8)&0xff;
     result[5] =  result3&0xff;
-	rt_kprintf("data: %d, %d, %d \n",result1,result2,result3);
+	ble_printf("data:%d,%d,%d \n",result1,result2,result3);
     uint16_t len = 6;
     //·ble_nus_data_send(&m_nus, result,&len , m_conn_handle);
 }
@@ -446,7 +587,7 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
             rt_kprintf("file creat and open successfully\r\n");
             }
             savedate = rt_thread_create("savedate",
-                        save_date, RT_NULL,
+                        save_adcdate, RT_NULL,
                         2048,
                         8, 20);
             if (savedate != RT_NULL)
@@ -472,8 +613,8 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
             LOG_I("start transport sample...");
             break;
         case 'T':
-            sendfile = savedate = rt_thread_create("sendfile",
-                        send_file_test, RT_NULL,
+            sendfile = rt_thread_create("sendfile",
+                        ble_file_transfer_test, RT_NULL,
                         2048,
                         8, 20);
             if (sendfile != RT_NULL)
@@ -574,6 +715,8 @@ static void conn_params_init(void)
     err_code = ble_conn_params_init(&cp_init);
     APP_ERROR_CHECK(err_code);
 }
+
+
 static int ble_app_init(void)
 {
     ble_stack_init();
@@ -604,58 +747,12 @@ int uart_putc_hook(rt_uint8_t *ch)
     return 0;
 }
 
-static void uart_task(void *param)
-{
-    uint16_t data_len = 0;
-    uint16_t onece_send_data_len = 50;
 
-    // 每隔1秒钟， 查询当前putc ringbuffer是否有数据需要发送
-    while (1)
-    {
-        data_len = rt_ringbuffer_data_len(&ringbuffer_putc_handler);
-        if (data_len > 0)
-        {
-            uint8_t *pdata = (uint8_t *)rt_malloc(data_len);
-            if(pdata == NULL)
-            {
-                rt_kprintf("malloc data failed, malloc len is %d\r\n", data_len);
-            }
-            else
-            {
-                // 内存分配成功
-                rt_ringbuffer_get(&ringbuffer_putc_handler, pdata, data_len);
-
-                // 将要发送的数据， 分次发送，每次发送onece_send_data_len数据
-                uint8_t count = 0;
-                uint16_t remainint_data = 0;
-                count = data_len / onece_send_data_len;
-                remainint_data = data_len % onece_send_data_len;
-
-                int i = 0;
-                for (i = 0; i < count; i++)
-                {
-                    ble_nus_data_send(&m_nus, pdata + i * onece_send_data_len, &onece_send_data_len, m_conn_handle);
-                    rt_thread_mdelay(200);
-                }
-                ble_nus_data_send(&m_nus, pdata + i * onece_send_data_len, &remainint_data, m_conn_handle);
-                rt_thread_mdelay(200);
-
-                // 释放内存
-                if (pdata != NULL)
-                {
-                    rt_free(pdata);
-                    pdata = NULL;
-                }
-            }
-        }
-        rt_thread_mdelay(1000);
-    }
-    
-}
+//实时传输开始
 int hrs_tf_on(void)
 {
     senddata = rt_thread_create("senddate",
-                        send_data_ol, RT_NULL,
+                        adc_data, RT_NULL,
                         2048,
                         8, 20);
     if (senddata != RT_NULL)
@@ -665,13 +762,19 @@ int hrs_tf_on(void)
 }
 
 MSH_CMD_EXPORT(hrs_tf_on, transport realtime);
+//实时传输结束
 int hrs_tf_off(void)
 {
-    rt_thread_delete(senddata);
+    if(senddata)
+    {
+        rt_thread_delete(senddata);
+    }
+    
     return RT_EOK;
 }
 MSH_CMD_EXPORT(hrs_tf_off, stop transport);
 
+//存数据测试
 int savetest(void)
 {
 
@@ -681,13 +784,16 @@ int savetest(void)
         rt_kprintf("file creat and open successfully\r\n");
     }
     int32_t timestart=rt_tick_get();
-    int count = 10000;
+    int count = 200;
     while(count)
     {
         count --;
-        result1 = rt_adc_read(adc_dev, 5);
-        result2 = rt_adc_read(adc_dev, 6);
-        result3 = rt_adc_read(adc_dev, 7);
+        // result1 = rt_adc_read(adc_dev, 5);
+        // result2 = rt_adc_read(adc_dev, 6);
+        // result3 = rt_adc_read(adc_dev, 7);
+        result1 = 0x3132;
+        result2 = 0x3334;
+        result3 = 0x3536;
         //rt_kprintf("%d %d %d \r\n",result1,result2,result3);
         result[0] = (result1>>8)&0xff;
         result[1] =  result1&0xff;
@@ -697,7 +803,7 @@ int savetest(void)
         result[5] =  result3&0xff;
         //rt_kprintf("%d %d %d %d %d %d \r\n",result[0],result[1],result[2],result[3],result[4],result[5]);
         write(fd,result,6);
-        rt_thread_mdelay(20);
+        //rt_thread_mdelay(20);
         
 
     }
@@ -707,6 +813,8 @@ int savetest(void)
 
 }
 MSH_CMD_EXPORT(savetest, test adc save to file);
+
+//读测试
 int readtest()
 {   int size;
     char buffer[40];
@@ -725,31 +833,32 @@ int stop_save(void)
 }
 MSH_CMD_EXPORT(stop_save, stop_save save adcvalue);
 
+//蓝牙串口发送数据
 int ble_uart_send(int argc, char **argv)
 {
     char buffer[256];
-    uint16_t length; 
+    uint16_t length;
     char text[15] = "ble uart test\n";
 
-    if(argc==1)
+    if (argc == 1)
     {
-        length = rt_strlen(text);
-        ble_nus_data_send(&m_nus, text, &length, m_conn_handle);
+        // length = rt_strlen(text);
+        // ble_nus_data_send(&m_nus, text, &length, m_conn_handle);
+ //       ble_printf("data:%d,%d,%d,%d,%d,%d,%d,%d\r\n", channel_data[0], channel_data[1], channel_data[2], channel_data[3], channel_data[4], channel_data[5], channel_data[6], channel_data[7]);
     }
 
-
-    if(argc==2)
+    if (argc == 2)
     {
         length = rt_strlen(argv[1]);
         rt_strncpy(buffer, argv[1], length);
         ble_nus_data_send(&m_nus, buffer, &length, m_conn_handle);
     }
 
-
-
     return 0;
 }
 MSH_CMD_EXPORT(ble_uart_send, ble uart test)
+
+
 
 // int ble_app_uart(void)
 // {
@@ -782,3 +891,53 @@ MSH_CMD_EXPORT(ble_uart_send, ble uart test)
 //     return RT_EOK;
 // }
 // MSH_CMD_EXPORT(ble_app_uart, ble app uart);
+
+// 发送本地数据至蓝牙串口 无用
+// static void uart_task(void *param)
+// {
+//     uint16_t data_len = 0;
+//     uint16_t onece_send_data_len = 50;
+
+//     // 每隔1秒钟， 查询当前putc ringbuffer是否有数据需要发送
+//     while (1)
+//     {
+//         data_len = rt_ringbuffer_data_len(&ringbuffer_putc_handler);
+//         if (data_len > 0)
+//         {
+//             uint8_t *pdata = (uint8_t *)rt_malloc(data_len);
+//             if(pdata == NULL)
+//             {
+//                 rt_kprintf("malloc data failed, malloc len is %d\r\n", data_len);
+//             }
+//             else
+//             {
+//                 // 内存分配成功
+//                 rt_ringbuffer_get(&ringbuffer_putc_handler, pdata, data_len);
+
+//                 // 将要发送的数据， 分次发送，每次发送onece_send_data_len数据
+//                 uint8_t count = 0;
+//                 uint16_t remainint_data = 0;
+//                 count = data_len / onece_send_data_len;
+//                 remainint_data = data_len % onece_send_data_len;
+
+//                 int i = 0;
+//                 for (i = 0; i < count; i++)
+//                 {
+//                     ble_nus_data_send(&m_nus, pdata + i * onece_send_data_len, &onece_send_data_len, m_conn_handle);
+//                     rt_thread_mdelay(200);
+//                 }
+//                 ble_nus_data_send(&m_nus, pdata + i * onece_send_data_len, &remainint_data, m_conn_handle);
+//                 rt_thread_mdelay(200);
+
+//                 // 释放内存
+//                 if (pdata != NULL)
+//                 {
+//                     rt_free(pdata);
+//                     pdata = NULL;
+//                 }
+//             }
+//         }
+//         rt_thread_mdelay(1000);
+//     }
+    
+// }

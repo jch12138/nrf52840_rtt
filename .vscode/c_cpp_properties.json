@@ -121,7 +121,6 @@
                 "d:\\nrf52840pluse\\packages\\nrf5x_sdk-latest\\rtt_adapter"
             ],
             "defines": [
-                "DEBUG",
                 "NRF52840_XXAA",
                 "SOFTDEVICE_PRESENT",
                 "__CLK_TCK=RT_TICK_PER_SECOND",

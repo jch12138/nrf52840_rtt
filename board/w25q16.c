@@ -28,7 +28,7 @@ static int rt_hw_spi_flash_init(void)
     return RT_EOK;
 }
 /* 导出到自动初始化 */
-//INIT_COMPONENT_EXPORT(rt_hw_spi_flash_init);
+INIT_COMPONENT_EXPORT(rt_hw_spi_flash_init);
 
 static int mnt_init(void)
 {
@@ -42,6 +42,6 @@ static int mnt_init(void)
         LOG_E("Dfs mount failed");
     }
 }
-//INIT_ENV_EXPORT(mnt_init);
+INIT_ENV_EXPORT(mnt_init);
 
 #endif

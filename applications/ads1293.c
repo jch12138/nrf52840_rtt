@@ -97,9 +97,9 @@ void ads1293_read_data(void)
     // }
     ads1293_read_multi_regs(0x37,9,buff);
     // rt_kprintf("%d,%d,%d\n",buff[0],buff[1],buff[2]);
-    three_channel_data[0] = buff[0] * 65536 + buff[1] * 256 + buff[2];
-    three_channel_data[1] = buff[3] * 65536 + buff[4] * 256 + buff[5];
-    three_channel_data[2] = buff[6] * 65536 + buff[7] * 256 + buff[8];
+    three_channel_data[0] = (buff[0] * 65536 + buff[1] * 256 + buff[2]);
+    three_channel_data[1] = (buff[3] * 65536 + buff[4] * 256 + buff[5]);
+    three_channel_data[2] = (buff[6] * 65536 + buff[7] * 256 + buff[8]);
 }
 
 void drdb_pin_irq(void)
@@ -162,10 +162,13 @@ void ads1293_init_5lead(void)
 
     ads1293_write_reg(0x10, 0x01);
     ads1293_write_reg(0x12, 0x04);
-    ads1293_write_reg(0x21, 0x02);
+    //ADCmax=0xB964F0=0D12,150,000
+    //R1 default 4 R2 5  R3 6
+    ads1293_write_reg(0x21, 0x02);//
     ads1293_write_reg(0x22, 0x02);
     ads1293_write_reg(0x23, 0x02);
     ads1293_write_reg(0x24, 0x02);
+
     ads1293_write_reg(0x27, 0x08);
     ads1293_write_reg(0x2f, 0x70);
 
@@ -186,7 +189,7 @@ void ads1293_thread_entry(void *parameter)
         // while(rt_pin_read(ADS1293_DRDB_PIN) != PIN_HIGH);
         // while(rt_pin_read(ADS1293_DRDB_PIN) != PIN_LOW);
         ads1293_read_data();
-        rt_kprintf("data:%d,%d,%d\r\n", three_channel_data[0], three_channel_data[1], three_channel_data[2]);
+        rt_kprintf("data:%d ,%d ,%d\r\n", three_channel_data[0], three_channel_data[1], three_channel_data[2]);
         rt_thread_mdelay(20);
     }
 }
@@ -194,7 +197,7 @@ void ads1293_thread_entry(void *parameter)
 void ads_start(void)
 {
     rt_thread_t tid;
-    tid = rt_thread_create("ads", ads1293_thread_entry, RT_NULL, 2048, 3, 10);
+    tid = rt_thread_create("ads", ads1293_thread_entry, RT_NULL, 2048, 3, 20);
     rt_thread_startup(tid);
 }
 MSH_CMD_EXPORT(ads_start, ads test);

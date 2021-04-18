@@ -4,7 +4,8 @@
         "sfud.h": "c",
         "sfud_def.h": "c",
         "sfud_flash_def.h": "c",
-        "rtdbg.h": "c"
+        "rtdbg.h": "c",
+        "ble_nus.h": "c"
     },
     "python.pythonPath": "C:\\Users\\huang\\anaconda3\\python.exe"
 }
