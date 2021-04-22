@@ -1,5 +1,10 @@
 [
  {
+  "path": "/packages/iot/NimBLE", 
+  "ver": "latest", 
+  "name": "NIMBLE"
+ }, 
+ {
   "path": "/packages/peripherals/nrf5x_sdk", 
   "ver": "latest", 
   "name": "NRF5X_SDK"

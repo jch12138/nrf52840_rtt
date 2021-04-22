@@ -12,6 +12,7 @@
                 "D:/nrf52840pluse/board",
                 "D:/nrf52840pluse/libraries/cmsis/include",
                 "D:/nrf52840pluse/libraries/drivers",
+                "D:/nrf52840pluse/packages/crclib-v1.00/inc",
                 "D:/nrf52840pluse/packages/fastlz-v1.0.1",
                 "D:/nrf52840pluse/packages/nrf5x_sdk-latest/components/ble/ble_advertising",
                 "D:/nrf52840pluse/packages/nrf5x_sdk-latest/components/ble/ble_link_ctx_manager",
@@ -121,6 +122,7 @@
                 "d:\\nrf52840pluse\\packages\\nrf5x_sdk-latest\\rtt_adapter"
             ],
             "defines": [
+                "DEBUG",
                 "NRF52840_XXAA",
                 "SOFTDEVICE_PRESENT",
                 "__CLK_TCK=RT_TICK_PER_SECOND",

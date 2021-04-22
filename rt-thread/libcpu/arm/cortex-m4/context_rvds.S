@@ -37,8 +37,8 @@ NVIC_PENDSVSET  EQU     0x10000000               ; value to trigger PendSV excep
 ; */
 rt_hw_interrupt_disable    PROC
     EXPORT  rt_hw_interrupt_disable
-    ;MRS     r0, PRIMASK
-    ;CPSID   I
+    MRS     r0, PRIMASK
+    CPSID   I
     BX      LR
     ENDP
 
@@ -47,7 +47,7 @@ rt_hw_interrupt_disable    PROC
 ; */
 rt_hw_interrupt_enable    PROC
     EXPORT  rt_hw_interrupt_enable
-    ;MSR     PRIMASK, r0
+    MSR     PRIMASK, r0
     BX      LR
     ENDP
 
